@@ -9,7 +9,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="pat@example.com" formControlName="password" required>
+            <input matInput formControlName="password" required>
             <mat-error *ngIf="password?.invalid">{{ passwordErrorMessage }}</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary">
