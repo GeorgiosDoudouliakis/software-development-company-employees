@@ -18,6 +18,10 @@
     background: black;
 }
 
+.mat-simple-snackbar > span:first-of-type {
+    font-size: 1rem;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
