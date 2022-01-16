@@ -17,7 +17,10 @@
             <mat-icon>input</mat-icon>
         </button>
     </form>
-    <button mat-button color="accent" class="password-forgot-btn" role="link">Forgot your password?</button>
+    <button mat-button color="accent" class="password-forgot-btn" role="link"
+    (click)="openForgotPasswordDialog()">
+        Forgot your password?
+    </button>
     <div class="sign-up">
         <p>If you don't have an account then</p>
         <button mat-button color="accent" role="link" (click)="router.navigate(['/auth/sign-up'])">Sign Up</button>

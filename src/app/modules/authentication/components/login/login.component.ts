@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public router: Router) { }
+  constructor(private fb: FormBuilder, public router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initializeLoginForm();
@@ -36,5 +38,13 @@ export class LoginComponent implements OnInit {
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required, Validators.minLength(10)])
     })
+  }
+
+  openForgotPasswordDialog() {
+    const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 }
