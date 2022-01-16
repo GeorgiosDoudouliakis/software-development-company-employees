@@ -1,0 +1,44 @@
+<section class="auth-page animate__animated animate__backInDown">
+    <ng-content select="h2"></ng-content>
+    <ng-content select="p"></ng-content>
+    <form [formGroup]="authForm" class="auth-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" autocomplete="off" required>
+            <mat-error *ngIf="email?.invalid">{{ emailErrorMessage }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                <mat-icon class="preview-password">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.invalid">Password must contain at least 10 characters</mat-error>
+        </mat-form-field>
+        <ng-container *ngIf="authType === 'signup'">
+            <mat-form-field appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmPassword" [type]="hideConfirmPassword ? 'password' : 'text'" required>
+                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hideConfirmPassword">
+                    <mat-icon class="preview-password">{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="confirmPassword?.invalid">Password must contain at least 10 characters</mat-error>
+            </mat-form-field>
+        </ng-container>
+        <button mat-raised-button color="primary" role="link">
+            <span>{{ authType === 'signup' ? 'Submit' : 'Log In'}}</span>
+            <mat-icon *ngIf="authType === 'signup'">done</mat-icon>
+            <mat-icon *ngIf="authType === 'login'">input</mat-icon>
+        </button>
+    </form>
+    <ng-container *ngIf="authType === 'login'">
+        <button mat-button color="accent" class="password-forgot-btn" role="link"
+        (click)="openForgotPasswordDialog()">
+            Forgot your password?
+        </button>
+        <div class="sign-up">
+            <p>If you don't have an account then</p>
+            <button mat-button color="accent" role="link" (click)="router.navigate(['/auth/sign-up'])">Sign Up</button>
+        </div>
+    </ng-container>
+</section>
