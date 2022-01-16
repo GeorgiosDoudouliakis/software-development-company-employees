@@ -11,6 +11,7 @@ import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  hidePassword: boolean = true;
 
   constructor(private fb: FormBuilder, public router: Router, private dialog: MatDialog) { }
 

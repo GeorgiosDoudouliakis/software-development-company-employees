@@ -8,7 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
-  
+  hidePassword: boolean = true;
+  hideConfirmPassword: boolean = true;
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
