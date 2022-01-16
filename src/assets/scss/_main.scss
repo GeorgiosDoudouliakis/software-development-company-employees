@@ -8,3 +8,36 @@
 .mat-form-field.mat-focused .mat-form-field-label {
     color: white;
 }
+
+// Reusable Classes
+.auth-page {
+    @include flex(column, nowrap, center, center);
+    padding: 2rem 0;
+    h2, p, form, 
+    .mat-form-field {
+        margin-bottom: 1rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+        color: white;
+        letter-spacing: 0.1rem;
+    }
+    p {
+        font-size: 0.9rem;
+        color: white;
+    }
+}
+
+.auth-form {
+    @include flex(column, nowrap, unset, unset);
+    width: 400px;   
+    button {
+        @include flex(row, nowrap, center, center);
+        span {
+            font-size: 1rem;
+        }
+        mat-icon {
+            margin-left: 0.5rem;
+        }
+    }
+}
