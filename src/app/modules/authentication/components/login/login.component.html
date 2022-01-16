@@ -1,1 +1,25 @@
-<p>login works!</p>
+<section class="login-page">
+    <h2>LOGIN</h2>
+    <p>(login with your email and password in order to continue)</p>
+    <form [formGroup]="loginForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="email?.invalid">Email is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="password" required>
+            <mat-error *ngIf="password?.invalid">{{ passwordErrorMessage }}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary">
+            <span>Submit</span>
+            <mat-icon>input</mat-icon>
+        </button>
+    </form>
+    <button mat-button color="accent" class="password-forgot-btn">Forgot your password?</button>
+    <div class="sign-up">
+        <p>If you don't have an account then</p>
+        <button mat-button color="accent">Sign Up</button>
+    </div>
+</section>
