@@ -12,14 +12,14 @@
             <input matInput formControlName="password" required>
             <mat-error *ngIf="password?.invalid">{{ passwordErrorMessage }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" role="link">
             <span>Login</span>
             <mat-icon>input</mat-icon>
         </button>
     </form>
-    <button mat-button color="accent" class="password-forgot-btn">Forgot your password?</button>
+    <button mat-button color="accent" class="password-forgot-btn" role="link">Forgot your password?</button>
     <div class="sign-up">
         <p>If you don't have an account then</p>
-        <button mat-button color="accent">Sign Up</button>
+        <button mat-button color="accent" role="link">Sign Up</button>
     </div>
 </section>
