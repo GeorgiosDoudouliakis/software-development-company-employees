@@ -25,7 +25,8 @@
                 <mat-error *ngIf="confirmPassword?.invalid">Password must contain at least 10 characters</mat-error>
             </mat-form-field>
         </ng-container>
-        <button mat-raised-button color="primary" role="link">
+        <button mat-raised-button color="primary" role="link" [disabled]="authForm.invalid"
+        [style.cursor]="authForm.invalid ? 'no-drop' : 'pointer'">
             <span>{{ authType === 'signup' ? 'Submit' : 'Log In'}}</span>
             <mat-icon *ngIf="authType === 'signup'">done</mat-icon>
             <mat-icon *ngIf="authType === 'login'">input</mat-icon>
