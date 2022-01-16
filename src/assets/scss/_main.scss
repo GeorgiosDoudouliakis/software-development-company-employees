@@ -14,6 +14,10 @@
     color: white !important;
 }
 
+.mat-snack-bar-container {
+    background: black;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
@@ -49,4 +53,12 @@
 
 .preview-password {
     color: white;
+}
+
+.error {
+    color: #f44336;
+}
+
+.success {
+    color: #69f0ae;
 }
