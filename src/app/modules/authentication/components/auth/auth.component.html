@@ -1,7 +1,7 @@
 <section class="auth-page animate__animated animate__backInDown">
     <ng-content select="h2"></ng-content>
     <ng-content select="p"></ng-content>
-    <form [formGroup]="authForm" class="auth-form">
+    <form [formGroup]="authForm" class="auth-form" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
             <input matInput placeholder="pat@example.com" formControlName="email" autocomplete="off" required>
@@ -28,8 +28,7 @@
         <button mat-raised-button color="primary" role="link" [disabled]="authForm.invalid"
         [style.cursor]="authForm.invalid ? 'no-drop' : 'pointer'">
             <span>{{ authType === 'signup' ? 'Submit' : 'Log In'}}</span>
-            <mat-icon *ngIf="authType === 'signup'">done</mat-icon>
-            <mat-icon *ngIf="authType === 'login'">input</mat-icon>
+            <mat-icon>{{ authType === 'signup' ? 'done' : 'input'}}</mat-icon>
         </button>
     </form>
     <ng-container *ngIf="authType === 'login'">
