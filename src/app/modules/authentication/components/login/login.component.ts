@@ -24,17 +24,17 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  get passwordErrorMessage() {
-    if(this.password?.hasError('email')) {
+  get emailErrorMessage() {
+    if(this.email?.hasError('email')) {
       return 'Not a valid email';
     } 
-    return 'Password must contain at least 10 characters';
+    return 'Email is required';
   }
 
   initializeLoginForm() {
     this.loginForm = this.fb.group({
-      email: this.fb.control('', [Validators.required]),
-      password: this.fb.control('', [Validators.required, Validators.email,  Validators.minLength(10)])
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required, Validators.minLength(10)])
     })
   }
 }
