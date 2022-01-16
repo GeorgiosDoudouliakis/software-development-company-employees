@@ -9,11 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BackButtonComponent } from './components/back-button/back-button.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BackButtonComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
   exports: [
     HeaderComponent,
     FooterComponent,
+    BackButtonComponent,
     MatToolbarModule,
     ReactiveFormsModule,
     MatFormFieldModule,
