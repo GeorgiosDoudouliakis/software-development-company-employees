@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "software-dev-company-employees": {
+      "hosting": {
+        "software-development-company-employees": [
+          "software-dev-company-employees"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "software-dev-company-employees"
+  }
+}
