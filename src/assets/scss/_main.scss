@@ -10,6 +10,10 @@
     color: white;
 }
 
+.mat-input-element {
+    color: white !important;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
