@@ -79,6 +79,10 @@ export class AuthComponent implements OnInit {
       this.afAuth.createUserWithEmailAndPassword(email, password)
         .then(_ => this.openSnackBar('You have successfully signed in!', 'success'))
         .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
+    } else if(this.authType === 'login') {
+      this.afAuth.signInWithEmailAndPassword(email, password)
+        .then(_ => this.openSnackBar('You are now logged in!', 'success'))
+        .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
     }
   }
 
