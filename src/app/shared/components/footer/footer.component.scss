@@ -1,0 +1,21 @@
+.mat-toolbar {
+    padding: 0.5rem 0;
+}
+
+.mat-toolbar-row {
+    justify-content: center;
+    height: auto;
+    & > * {
+        font-size: 0.9rem;
+    }
+    img {
+        margin: 0 0.2rem;
+    }
+    p {
+        margin-bottom: 0;
+    }
+    a {
+        margin-left: 0.2rem;
+        color: white;
+    }
+}
