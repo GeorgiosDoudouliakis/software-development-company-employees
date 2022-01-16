@@ -1,1 +1,24 @@
-<p>sign-up works!</p>
+<section class="auth-page animate__animated animate__backInDown">
+    <h2>SIGN UP</h2>
+    <p>You don't have an account? Let's create one</p>
+    <form [formGroup]="signupForm" class="auth-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="email?.invalid">{{ emailErrorMessage }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" required>
+            <mat-error *ngIf="password?.invalid">Password must contain at least 10 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput formControlName="confirmPassword" required>
+            <mat-error *ngIf="confirmPassword?.invalid">Password must contain at least 10 characters</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" role="link">
+            <span>Submit</span>
+        </button>
+    </form>
+</section>
