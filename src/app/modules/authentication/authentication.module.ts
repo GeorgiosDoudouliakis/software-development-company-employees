@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordDialogComponent } from './components/forgot-password-dialog/forgot-password-dialog.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -13,7 +14,8 @@ const routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ForgotPasswordDialogComponent
   ],
   imports: [
     CommonModule,
