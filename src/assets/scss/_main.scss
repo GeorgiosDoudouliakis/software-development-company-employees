@@ -1,6 +1,7 @@
 @import './mixins';
 @import '~animate.css/animate.min';
 
+// Angular Material classes overwrite
 .mat-form-field-subscript-wrapper {
     padding: 0 !important;
 }
