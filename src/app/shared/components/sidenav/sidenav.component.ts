@@ -18,6 +18,7 @@ export class SidenavComponent implements OnInit {
     this.authService.logOut()
       .then(_ => {
         this.authService.openSnackBar('You have successfully logged out!', 'success');
+        this.authService.clearToken();
         this.router.navigate(['/auth/login']);
       })
       .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));

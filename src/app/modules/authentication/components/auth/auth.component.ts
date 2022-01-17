@@ -84,6 +84,7 @@ export class AuthComponent implements OnInit {
       this.authService.signUp(email, password)
         .then(_ => { 
           this.authService.openSnackBar('You have successfully signed in!', 'success');
+          this.authService.saveToken();
           this.router.navigate(['/employees']); 
         })
         .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
@@ -91,6 +92,7 @@ export class AuthComponent implements OnInit {
       this.authService.logIn(email, password)
         .then(_ => {
           this.authService.openSnackBar('You are now logged in!', 'success');
+          this.authService.saveToken();
           this.router.navigate(['/employees']);
         })
         .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
