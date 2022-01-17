@@ -16,6 +16,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule
   ],
   exports: [
     HeaderComponent,
@@ -54,7 +62,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule
   ]
 })
 export class SharedModule { }
