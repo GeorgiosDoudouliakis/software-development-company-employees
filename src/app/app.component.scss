@@ -1,4 +1,7 @@
+@import 'src/styles';
+
 main {
+    @include flex(row, nowrap, unset, unset);
     min-height: calc(100vh - 140.8px);
     background: #000000de;
 }
