@@ -66,9 +66,11 @@ export class AuthComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(email => {
-      this.authService.passwordReset(email)
+      if(email) {
+        this.authService.passwordReset(email)
         .then(_ => this.authService.openSnackBar('An email for password reset has been sent to you!', 'info'))
         .catch((err: FirebaseError) => this.showErrorMessage(err));
+      }
     });
   }
 
