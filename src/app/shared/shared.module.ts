@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { BackButtonComponent } from './components/back-button/back-button.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,7 +21,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    BackButtonComponent,
     PageNotFoundComponent,
     SidenavComponent
   ],
@@ -44,7 +42,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [
     HeaderComponent,
     FooterComponent,
-    BackButtonComponent,
     PageNotFoundComponent,
     SidenavComponent,
     MatToolbarModule,
