@@ -34,6 +34,10 @@ a {
     font-size: 1rem;
 }
 
+.mat-form-field {
+    width: 100%;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
