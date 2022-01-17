@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add-employee-dialog.component';
 
 const routes = [
   { path: '', component: EmployeesComponent , canActivate: [AuthGuard] }
@@ -11,7 +12,8 @@ const routes = [
 
 @NgModule({
   declarations: [
-    EmployeesComponent
+    EmployeesComponent,
+    AddEmployeeDialogComponent
   ],
   imports: [
     CommonModule,
