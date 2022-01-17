@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirebaseError } from '@firebase/util';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -23,7 +22,6 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder, 
     public router: Router, 
     private dialog: MatDialog,
-    private afAuth: AngularFireAuth,
     private authService: AuthService
   ) { }
 
