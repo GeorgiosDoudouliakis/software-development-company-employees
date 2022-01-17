@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-add-employee-dialog',
@@ -9,22 +11,23 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 })
 export class AddEmployeeDialogComponent implements OnInit {
   addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
   projects: string[] = [];
+  readonly separatorKeysCodes = [ENTER, COMMA];
 
-  constructor() {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Employee, 
+    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
+  ) {}
 
   ngOnInit(): void {}
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       this.projects.push(value);
     }
 
-    // Clear the input value
     event.chipInput!.clear();
   }
 
@@ -34,5 +37,17 @@ export class AddEmployeeDialogComponent implements OnInit {
     if (index >= 0) {
       this.projects.splice(index, 1);
     }
+  }
+
+  onAddEmployee() {
+    this.dialogRef.close({
+      firstName: this.data.firstName,
+      lastName: this.data.lastName,
+      age: this.data.age,
+      contractType: this.data.contractType,
+      speciality: this.data.speciality,
+      hireDate: this.data.hireDate,
+      projects: this.projects
+    })
   }
 }
