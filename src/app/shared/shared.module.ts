@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HeaderComponent,
     FooterComponent,
     BackButtonComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FooterComponent,
     BackButtonComponent,
     PageNotFoundComponent,
+    SidenavComponent,
     MatToolbarModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,0 +1,42 @@
+.sidenav-container {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100px;
+    height: calc(100vh - 140.8px);
+    z-index: 1;
+}
+
+.sidenav, mat-menu {
+    width: 100%;
+}
+
+ul {
+    padding: 0;
+    li {
+        width: 100%;
+        a {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            width: 100%;
+            padding: 0.5rem 0;
+            color: #69F0AE;
+            transition: .4s ease-in-out;
+            mat-icon {
+                margin-bottom: 0.2rem;
+            }
+            &:hover {
+                color: black;
+                background: #69F0AE;
+            }
+        }
+    }
+}
+
+.active {
+    color: black;
+    background: #69F0AE;
+}
