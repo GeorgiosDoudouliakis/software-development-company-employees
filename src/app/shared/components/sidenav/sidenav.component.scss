@@ -29,15 +29,10 @@ ul {
             mat-icon {
                 margin-bottom: 0.2rem;
             }
-            &:hover {
+            &:hover, &.active {
                 color: black;
                 background: #69F0AE;
             }
         }
     }
-}
-
-.active {
-    color: black;
-    background: #69F0AE;
 }
