@@ -82,20 +82,22 @@ export class AuthComponent implements OnInit {
     && this.authForm.valid 
     && this.password?.value === this.confirmPassword?.value) {
       this.authService.signUp(email, password)
-        .then(_ => { 
-          this.authService.openSnackBar('You have successfully signed in!', 'success');
-          this.authService.saveToken();
-          this.router.navigate(['/employees']); 
-        })
-        .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
+        .then(_ => this.onSuccess('You have successfully signed in!'))
+        .catch((err: FirebaseError) => this.showErrorMessage(err));
     } else if(this.authType === 'login') {
       this.authService.logIn(email, password)
-        .then(_ => {
-          this.authService.openSnackBar('You are now logged in!', 'success');
-          this.authService.saveToken();
-          this.router.navigate(['/employees']);
-        })
-        .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
+        .then(_ => this.onSuccess('You are now logged in!'))
+        .catch((err: FirebaseError) => this.showErrorMessage(err));
     }
+  }
+
+  private onSuccess(msg: string) {
+    this.authService.openSnackBar(msg, 'success');
+    this.authService.saveToken();
+    this.router.navigate(['/employees']);
+  }
+
+  private showErrorMessage(err: FirebaseError) {
+    this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error');
   }
 }
