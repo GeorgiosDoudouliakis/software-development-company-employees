@@ -82,11 +82,17 @@ export class AuthComponent implements OnInit {
     && this.authForm.valid 
     && this.password?.value === this.confirmPassword?.value) {
       this.authService.signUp(email, password)
-        .then(_ => this.authService.openSnackBar('You have successfully signed in!', 'success'))
+        .then(_ => { 
+          this.authService.openSnackBar('You have successfully signed in!', 'success');
+          this.router.navigate(['/employees']); 
+        })
         .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
     } else if(this.authType === 'login') {
       this.authService.logIn(email, password)
-        .then(_ => this.authService.openSnackBar('You are now logged in!', 'success'))
+        .then(_ => {
+          this.authService.openSnackBar('You are now logged in!', 'success');
+          this.router.navigate(['/employees']);
+        })
         .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
     }
   }
