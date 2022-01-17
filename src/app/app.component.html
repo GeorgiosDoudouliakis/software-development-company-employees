@@ -4,4 +4,4 @@
 </main>
 <app-footer></app-footer>
 
-<app-back-button></app-back-button>
+<app-back-button *ngIf="!(afAuth.authState | async)"></app-back-button>
