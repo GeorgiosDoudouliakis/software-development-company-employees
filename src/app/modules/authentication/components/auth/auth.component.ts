@@ -63,10 +63,15 @@ export class AuthComponent implements OnInit {
 
   openForgotPasswordDialog() {
     const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {
-      width: '350px'
+      width: '350px',
+      data: {}
     });
 
-    dialogRef.afterClosed().subscribe();
+    dialogRef.afterClosed().subscribe(email => {
+      this.afAuth.sendPasswordResetEmail(email)
+        .then(_ => this.openSnackBar('An email for password reset has been sent to you!', 'info'))
+        .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
+    });
   }
 
   onSubmit() {
