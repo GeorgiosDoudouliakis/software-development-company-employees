@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FirebaseError } from '@firebase/util';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
     public router: Router, 
     private dialog: MatDialog,
     private afAuth: AngularFireAuth,
-    private _snackBar: MatSnackBar
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -68,9 +68,9 @@ export class AuthComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(email => {
-      this.afAuth.sendPasswordResetEmail(email)
-        .then(_ => this.openSnackBar('An email for password reset has been sent to you!', 'info'))
-        .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
+      this.authService.passwordReset(email)
+        .then(_ => this.authService.openSnackBar('An email for password reset has been sent to you!', 'info'))
+        .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
     });
   }
 
@@ -81,29 +81,13 @@ export class AuthComponent implements OnInit {
     if(this.authType === 'signup' 
     && this.authForm.valid 
     && this.password?.value === this.confirmPassword?.value) {
-      this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then(_ => this.openSnackBar('You have successfully signed in!', 'success'))
-        .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
+      this.authService.signUp(email, password)
+        .then(_ => this.authService.openSnackBar('You have successfully signed in!', 'success'))
+        .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
     } else if(this.authType === 'login') {
-      this.afAuth.signInWithEmailAndPassword(email, password)
-        .then(_ => this.openSnackBar('You are now logged in!', 'success'))
-        .catch((err: FirebaseError) => this.openSnackBar(this.authenticationError(err.message), 'error'));
+      this.authService.logIn(email, password)
+        .then(_ => this.authService.openSnackBar('You are now logged in!', 'success'))
+        .catch((err: FirebaseError) => this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error'));
     }
-  }
-
-  private openSnackBar(message: string, className: string) {
-    this._snackBar.open(message, 'OK', {
-      horizontalPosition: 'end',
-      verticalPosition: 'bottom',
-      panelClass: className
-    });
-  }
-
-  private authenticationError(error: string) {
-    // Firebase error is something like: Firebase: Password should be at least 6 characters (auth/weak-password)
-    const slash = error.indexOf('/');
-    const closingParenthesis = error.indexOf(')');
-    const errorMessage = error.substring(slash + 1, closingParenthesis).split('-').join(' ');
-    return errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
   }
 }
