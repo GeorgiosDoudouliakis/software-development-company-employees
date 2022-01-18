@@ -7,6 +7,7 @@ export interface Employee {
     lastName?: string;
     contractType?: ContractType;
     speciality?: Speciality;
+    frontEndFramework?: string;
     projects?: string[];
     id?: string;
 }

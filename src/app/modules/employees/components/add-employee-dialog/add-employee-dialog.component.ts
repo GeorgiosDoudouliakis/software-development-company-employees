@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddEmployeeDialogComponent implements OnInit {
   employeeForm: FormGroup;
   availableProjects: string[] = ['Tomi Systems', 'Pure Profile', 'VMWare'];
+  availableFrontEndFrameworks: string[] = ['Angular', 'React', 'Vue'];
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +58,7 @@ export class AddEmployeeDialogComponent implements OnInit {
       lastName: this.fb.control(this.data.lastName || '', Validators.required),
       contractType: this.fb.control(this.data.contractType || '', Validators.required),
       speciality: this.fb.control(this.data.speciality || '', Validators.required),
+      frontEndFramework: this.fb.control(this.data.frontEndFramework || '', Validators.required),
       projects: this.fb.control(this.data.projects || [], Validators.required),
     })
   }
