@@ -37,6 +37,10 @@ export class AddEmployeeDialogComponent implements OnInit {
   get speciality() {
     return this.employeeForm.get('speciality');
   }
+
+  get frontEndFrameworks() {
+    return this.employeeForm.get('frontEndFrameworks');
+  }
   
   get empProjects() {
     return this.employeeForm.get('projects');
@@ -48,6 +52,7 @@ export class AddEmployeeDialogComponent implements OnInit {
       lastName: this.capitalizeFirstLetter(this.lastName?.value),
       contractType: this.contractType?.value,
       speciality: this.speciality?.value,
+      frontEndFrameworks: this.frontEndFrameworks?.value,
       projects: this.empProjects?.value
     })
   }
@@ -58,7 +63,7 @@ export class AddEmployeeDialogComponent implements OnInit {
       lastName: this.fb.control(this.data.lastName || '', Validators.required),
       contractType: this.fb.control(this.data.contractType || '', Validators.required),
       speciality: this.fb.control(this.data.speciality || '', Validators.required),
-      frontEndFramework: this.fb.control(this.data.frontEndFramework || '', Validators.required),
+      frontEndFrameworks: this.fb.control(this.data.frontEndFrameworks || [], Validators.required),
       projects: this.fb.control(this.data.projects || [], Validators.required),
     })
   }

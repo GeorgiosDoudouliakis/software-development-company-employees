@@ -12,24 +12,26 @@
 }
 
 .mat-card-subtitle {
+    padding-bottom: 0.3rem;
     margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(160, 160, 160);
     &:not(:first-child) {
         margin-top: 0;
     }
 }
 
-.mat-card-content {
+.mat-card-content, 
+.technologies-container {
     margin-bottom: 10px;
 }
 
-.projects {
-    font-size: 1rem;
-    margin-right: 0.5rem;
+.framework-chip > img {
+    margin-right: 0.3rem;
 }
 
 ::ng-deep .mat-chip-list-wrapper {
     display: inline-flex !important;
-    margin: 4px 4px 0 0 !important;
+    margin: 0 !important;
 }
 
 .mat-card-actions {

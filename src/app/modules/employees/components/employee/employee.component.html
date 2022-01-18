@@ -4,10 +4,19 @@
     </mat-card-title>
     <mat-card-subtitle>{{ employee.speciality }} Developer ({{ employee.contractType }})</mat-card-subtitle>
     <mat-card-content>
-        <span class="projects">Projects:</span>
-        <mat-chip-list *ngFor="let project of employee.projects">
-            <mat-chip>{{ project }}</mat-chip>
-        </mat-chip-list>
+        <section class="technologies-container">
+            <mat-chip-list>
+                <mat-chip *ngFor="let framework of employee.frontEndFrameworks" class="framework-chip">
+                    <img src="assets/images/{{ framework | lowercase }}_logo.png" alt="{{ framework }} logo">
+                    <span>{{ framework }}</span>
+                </mat-chip>
+            </mat-chip-list>
+        </section>
+        <section class="projects-container">
+            <mat-chip-list *ngFor="let project of employee.projects">
+                <mat-chip>{{ project }}</mat-chip>
+            </mat-chip-list>
+        </section>
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-stroked-button color="warn" (click)="onDelete(employee.id)">Delete</button>
