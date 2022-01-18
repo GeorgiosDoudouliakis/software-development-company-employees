@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseError } from '@firebase/util';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Employee } from '../../models/employee.model';
 import { EmployeesService } from '../../services/employees.service';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
@@ -11,12 +13,18 @@ import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-
   styleUrls: ['./employee.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit, OnDestroy {
   @Input() employee: Employee;
+  private destroy$ = new Subject();
 
   constructor(private employeesService: EmployeesService, private dialog: MatDialog) { }
 
   ngOnInit(): void {}
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   onDelete(employeeId: string | undefined) {
     this.employeesService.deleteEmployee(employeeId)
@@ -32,7 +40,7 @@ export class EmployeeComponent implements OnInit {
       data: { action: 'edit', firstName, lastName, age, contractType, speciality, projects }
     })
 
-    dialogRef.afterClosed().subscribe((emp: Employee) => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {
       this.employeesService.updateEmployee(employee.id, emp)
         .then(_ => this.employeesService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
         .catch((err: FirebaseError) => this.showErrorMessage(err));

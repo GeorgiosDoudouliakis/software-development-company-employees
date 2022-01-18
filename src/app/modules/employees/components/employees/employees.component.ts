@@ -4,7 +4,8 @@ import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-
 import { Employee } from '../../models/employee.model';
 import { EmployeesService } from '../../services/employees.service';
 import { FirebaseError } from '@firebase/util';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employees',
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
   employees: Employee[];
-  private employeesSub$: Subscription;
+  private destroy$ = new Subject();
 
   constructor(private dialog: MatDialog, public employeesService: EmployeesService) { }
 
@@ -22,13 +23,12 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.employeesSub$?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   getEmployees() {
-    this.employeesSub$ = this.employeesService.employees.subscribe(res => {
-      this.employees = res;
-    })
+    this.employeesService.employees.pipe(takeUntil(this.destroy$)).subscribe(res => this.employees = res);
   }
 
   addEmployee() {
@@ -39,7 +39,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       }
     })
 
-    dialogRef.afterClosed().subscribe((employee: Employee) => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((employee: Employee) => {
       if(employee) {
         this.employeesService.addEmployee(employee)
           .then(_ => this.employeesService.openSnackBar('Employee succesfully added', 'success'))

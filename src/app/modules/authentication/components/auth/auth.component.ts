@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 import { FirebaseError } from '@firebase/util';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -12,11 +14,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   @Input() authType: 'login' | 'signup';
   authForm: FormGroup;
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
+  private destroy$ = new Subject();
 
   constructor(
     private fb: FormBuilder, 
@@ -31,6 +34,11 @@ export class AuthComponent implements OnInit {
     if(this.authType === 'signup') {
       this.authForm.addControl('confirmPassword', this.fb.control('', [Validators.required, Validators.minLength(10)]));
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   get email() {
@@ -65,7 +73,7 @@ export class AuthComponent implements OnInit {
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(email => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(email => {
       if(email) {
         this.authService.passwordReset(email)
         .then(_ => this.authService.openSnackBar('An email for password reset has been sent to you!', 'info'))
