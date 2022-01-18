@@ -7,7 +7,7 @@
         <section class="technologies-container">
             <mat-chip-list>
                 <mat-chip *ngFor="let tech of employee.technologies" class="tech-chip">
-                    <img src="assets/images/{{ tech | lowercase }}_logo.png" alt="{{ tech }} logo">
+                    <img src="assets/images/{{ tech | removeSpaces }}_logo.png" alt="{{ tech }} logo">
                     <span>{{ tech }}</span>
                 </mat-chip>
             </mat-chip-list>

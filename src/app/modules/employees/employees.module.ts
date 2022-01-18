@@ -8,6 +8,7 @@ import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add
 import { EmployeeComponent } from './components/employee/employee.component';
 import { ShowCustomizeBtnDirective } from './directives/show-customize-btn.directive';
 import { ShowAddEmployeeBtnTextDirective } from './directives/show-add-employee-btn-text.directive';
+import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
 
 const routes = [
   { path: '', component: EmployeesComponent , canActivate: [AuthGuard] }
@@ -19,7 +20,8 @@ const routes = [
     AddEmployeeDialogComponent,
     EmployeeComponent,
     ShowCustomizeBtnDirective,
-    ShowAddEmployeeBtnTextDirective
+    ShowAddEmployeeBtnTextDirective,
+    RemoveSpacesPipe
   ],
   imports: [
     CommonModule,
