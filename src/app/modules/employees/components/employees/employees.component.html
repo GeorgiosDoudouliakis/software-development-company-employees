@@ -15,10 +15,9 @@
         <a href="">here</a>
     </p>
     <section class="employees-page-action-btns">
-        <button mat-mini-fab color="accent" class="add-employee-btn" (click)="addEmployee()" 
-        (mouseover)="showAddEmployeeText = true" (mouseleave)="showAddEmployeeText = false">
+        <button mat-mini-fab color="accent" class="add-employee-btn" (click)="addEmployee()" appShowAddEmployeeBtnText>
             <mat-icon>add</mat-icon>
-            <span *ngIf="showAddEmployeeText">Add Employee</span>
+            <span class="add-employee-btn-text">Add Employee</span>
         </button>
         <button mat-stroked-button color="accent" role="link" class="company-details-btn">
             Company Details

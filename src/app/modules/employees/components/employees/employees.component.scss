@@ -72,9 +72,15 @@ p {
 .add-employee-btn {
     margin-bottom: 1rem;
     transition: .4s ease-in-out;
-    &:hover {
+    &.increase-width {
         width: 150px;
         border-radius: 100px;
+    }
+    .add-employee-btn-text {
+        display: none;
+        &.show {
+            display: inline-block;
+        }
     }
 }
 

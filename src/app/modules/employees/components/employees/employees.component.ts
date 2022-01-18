@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
   employees: Employee[];
-  showAddEmployeeText: boolean = false;
   private employeesSub$: Subscription;
 
   constructor(private dialog: MatDialog, public employeesService: EmployeesService) { }
