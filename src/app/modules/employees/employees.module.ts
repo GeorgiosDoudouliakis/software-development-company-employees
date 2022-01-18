@@ -8,7 +8,6 @@ import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add
 import { EmployeeComponent } from './components/employee/employee.component';
 import { ShowCustomizeBtnDirective } from './directives/show-customize-btn.directive';
 import { ShowAddEmployeeBtnTextDirective } from './directives/show-add-employee-btn-text.directive';
-import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
 
 const routes = [
   { path: '', component: EmployeesComponent , canActivate: [AuthGuard] }
@@ -20,8 +19,7 @@ const routes = [
     AddEmployeeDialogComponent,
     EmployeeComponent,
     ShowCustomizeBtnDirective,
-    ShowAddEmployeeBtnTextDirective,
-    CapitalizeFirstLetterPipe
+    ShowAddEmployeeBtnTextDirective
   ],
   imports: [
     CommonModule,

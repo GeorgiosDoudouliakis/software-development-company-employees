@@ -48,8 +48,8 @@ export class AddEmployeeDialogComponent implements OnInit {
 
   onAddEmployee() {
     this.dialogRef.close({
-      firstName: this.firstName?.value,
-      lastName: this.lastName?.value,
+      firstName: this.capitalizeFirstLetter(this.firstName?.value),
+      lastName: this.capitalizeFirstLetter(this.lastName?.value),
       age: this.age?.value,
       contractType: this.contractType?.value,
       speciality: this.speciality?.value,
@@ -66,5 +66,9 @@ export class AddEmployeeDialogComponent implements OnInit {
       speciality: this.fb.control(this.data.speciality || '', Validators.required),
       projects: this.fb.control(this.data.projects || [], Validators.required),
     })
+  }
+
+  private capitalizeFirstLetter(input: string) {
+    return input.charAt(0).toUpperCase() + input.slice(1);
   }
 }
