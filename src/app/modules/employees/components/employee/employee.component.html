@@ -6,10 +6,9 @@
     <mat-card-subtitle>{{ employee.speciality }} Developer</mat-card-subtitle>
     <mat-card-content>
         <span>Contract Type: {{ employee.contractType }}</span>
-        <span>Hire Date: {{ employee.hireDate }}</span>
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-stroked-button color="warn" (click)="onDelete(employee.id)">Delete</button>
-      <button mat-raised-button color="primary">Edit</button>
+      <button mat-raised-button color="primary" (click)="openEdit(employee)">Edit</button>
     </mat-card-actions>
 </mat-card>

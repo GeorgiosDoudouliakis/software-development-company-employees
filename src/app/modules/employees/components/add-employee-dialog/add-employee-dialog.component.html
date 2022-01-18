@@ -30,28 +30,11 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>Hire Date</mat-label>
-            <input matInput [matDatepicker]="picker" autocomplete="off" formControlName="hireDate">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
             <mat-label>Projects</mat-label>
-            <mat-chip-list #chipList aria-label="Project selection">
-                <mat-chip *ngFor="let project of projects" (removed)="remove(project)">
-                    {{ project }}
-                    <button matChipRemove>
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </mat-chip>
-                <input placeholder="New project..."
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)"
-                formControlName="projects" autocomplete="off">
-            </mat-chip-list>
-        </mat-form-field>
+            <mat-select formControlName="projects" multiple>
+              <mat-option *ngFor="let project of availableProjects" [value]="project">{{ project }}</mat-option>
+            </mat-select>
+          </mat-form-field>
         <small *ngIf="employeeForm.invalid" class="error">You must fill all the fields in order to add an employee</small>
     </form>
 </mat-dialog-content>
