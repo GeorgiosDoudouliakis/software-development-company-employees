@@ -27,6 +27,11 @@ p {
 
 .add-employee {
     margin-bottom: 1rem;
+    transition: .4s ease-in-out;
+    &:hover {
+        width: 150px;
+        border-radius: 100px;
+    }
 }
 
 .employees-container {
