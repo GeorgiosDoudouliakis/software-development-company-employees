@@ -3,7 +3,8 @@
         <source type="image/webp" src="assets/images/employees_page_default.webp" />
         <img src="assets/images/employees_page_default.jpg" class="default-img" />
     </picture>
-    <button mat-raised-button color="accent" role="link" class="customize-brand">
+    <button mat-raised-button color="accent" role="link" class="customize-brand" 
+    matTooltip="Add company's logo and name" matTooltipPosition="below" [matTooltipClass]="['tooltip']">
         Customize
     </button>
 </section>
