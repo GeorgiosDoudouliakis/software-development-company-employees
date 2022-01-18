@@ -8,7 +8,6 @@ export interface Employee {
     age?: number;
     contractType?: ContractType;
     speciality?: Speciality;
-    hireDate?: string;
     projects?: string[];
     id?: string;
 }
