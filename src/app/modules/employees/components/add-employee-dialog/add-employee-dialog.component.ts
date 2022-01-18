@@ -67,8 +67,4 @@ export class AddEmployeeDialogComponent implements OnInit {
       projects: this.fb.control(this.data.projects || [], Validators.required),
     })
   }
-
-  private initializeProjects() {
-
-  }
 }
