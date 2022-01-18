@@ -1,6 +1,6 @@
-export type ContractType = 'full-time' | 'part-time' | 'freelance';
+export type ContractType = 'Full Time' | 'Part Time' | 'Freelance';
 
-export type Speciality = 'front-end' | 'back-end' | 'full-stack';
+export type Speciality = 'Front End' | 'Back End' | 'Full Stack';
 
 export interface Employee {
     firstName?: string;
