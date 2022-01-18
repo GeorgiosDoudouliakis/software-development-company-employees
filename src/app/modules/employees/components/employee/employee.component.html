@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-title>
+        <h3>{{ employee.firstName }} {{ employee.lastName }}</h3>
+        <span>({{ employee.age }})</span>
+    </mat-card-title>
+    <mat-card-subtitle>{{ employee.speciality }} Developer</mat-card-subtitle>
+    <mat-card-content>
+        <span>Contract Type: {{ employee.contractType }}</span>
+        <span>Hire Date: {{ employee.hireDate }}</span>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-stroked-button color="warn">Delete</button>
+      <button mat-raised-button color="primary">Edit</button>
+    </mat-card-actions>
+</mat-card>

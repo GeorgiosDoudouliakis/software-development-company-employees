@@ -1,0 +1,31 @@
+@import 'src/styles';
+
+.mat-card-title {
+    @include flex(row, nowrap, flex-start, center);
+    margin-bottom: 0.2rem;
+    color: #69F0AE;
+    h3 {
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+    span {
+        font-size: 1rem;
+        margin-left: 0.3rem;
+    }
+}
+
+.mat-card-subtitle {
+    margin-bottom: 0.8rem;
+    &:not(:first-child) {
+        margin-top: 0;
+    }
+}
+
+.mat-card-content {
+    span {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+}

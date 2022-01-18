@@ -1,9 +1,14 @@
 <section class="employees-page animate__animated animate__backInDown">
     <h2>EMPLOYEES</h2>
     <p>
-        If tou want to customize your profile and see the details reflected in the panel click 
+        If you want to customize your profile and see the details reflected in the panel click 
         <a href="">here</a>
     </p>
+    <section class="employees-container">
+        <ng-container *ngFor="let employee of employees">
+            <app-employee [employee]="employee"></app-employee>
+        </ng-container>
+    </section>
     <section class="add-employee">
         <button mat-stroked-button color="accent" (click)="addEmployee()">Add Employee</button>
     </section>
