@@ -38,6 +38,14 @@ a {
     width: 100%;
 }
 
+.mat-primary .mat-pseudo-checkbox-checked {
+    background: #69f0ae;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #69f0ae !important;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
