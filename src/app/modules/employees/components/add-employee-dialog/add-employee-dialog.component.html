@@ -1,57 +1,65 @@
 <h3 mat-dialog-title>Add Employee</h3>
 <mat-dialog-content class="mat-typography">
-    <mat-form-field appearance="fill">
-        <mat-label>First Name</mat-label>
-        <input matInput type="text" autocomplete="off" [(ngModel)]="data.firstName" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Last Name</mat-label>
-        <input matInput type="text" autocomplete="off" [(ngModel)]="data.lastName"/>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Age</mat-label>
-        <input matInput type="number" autocomplete="off" [(ngModel)]="data.age"/>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Select Contract Type</mat-label>
-        <mat-select [(ngModel)]="data.contractType">
-            <mat-option value="Full Time">Full time</mat-option>
-            <mat-option value="Part Time">Part time</mat-option>
-            <mat-option value="Freelance">Freelance</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Speciality</mat-label>
-        <mat-select [(ngModel)]="data.speciality">
-            <mat-option value="Front End">Front End</mat-option>
-            <mat-option value="Back End">Back End</mat-option>
-            <mat-option value="Full Stack">Full Stack</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Hire Date</mat-label>
-        <input matInput [matDatepicker]="picker" autocomplete="off" [(ngModel)]="data.hireDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Projects</mat-label>
-        <mat-chip-list #chipList aria-label="Project selection">
-            <mat-chip *ngFor="let project of projects" (removed)="remove(project)">
-            {{ project }}
-            <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-            </button>
-            </mat-chip>
-            <input placeholder="New project..."
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)" autocomplete="off">
-        </mat-chip-list>
-    </mat-form-field>
+    <form [formGroup]="employeeForm">
+        <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" autocomplete="off" formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" autocomplete="off" formControlName="lastName"/>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Age</mat-label>
+            <input matInput type="number" autocomplete="off" formControlName="age"/>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Select Contract Type</mat-label>
+            <mat-select formControlName="contractType">
+                <mat-option value="Full Time">Full time</mat-option>
+                <mat-option value="Part Time">Part time</mat-option>
+                <mat-option value="Freelance">Freelance</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Speciality</mat-label>
+            <mat-select formControlName="speciality">
+                <mat-option value="Front End">Front End</mat-option>
+                <mat-option value="Back End">Back End</mat-option>
+                <mat-option value="Full Stack">Full Stack</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Hire Date</mat-label>
+            <input matInput [matDatepicker]="picker" autocomplete="off" formControlName="hireDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Projects</mat-label>
+            <mat-chip-list #chipList aria-label="Project selection">
+                <mat-chip *ngFor="let project of projects" (removed)="remove(project)">
+                    {{ project }}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input placeholder="New project..."
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+                formControlName="projects" autocomplete="off">
+            </mat-chip-list>
+        </mat-form-field>
+        <small *ngIf="employeeForm.invalid" class="error">You must fill all the fields in order to add an employee</small>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="dialogRef.close()">Cancel</button>
-  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="onAddEmployee()">Add</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="primary" 
+  (click)="onAddEmployee()" [disabled]="employeeForm.invalid" 
+  [style.cursor]="employeeForm.invalid ? 'no-drop' : 'pointer'">
+    Add
+  </button>
 </mat-dialog-actions>
