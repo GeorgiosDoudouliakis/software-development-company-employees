@@ -17,9 +17,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
@@ -44,9 +41,6 @@ import { MatCardModule } from '@angular/material/card';
     MatSidenavModule,
     MatTooltipModule,
     MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatChipsModule,
     MatCardModule
   ],
   exports: [
@@ -66,9 +60,6 @@ import { MatCardModule } from '@angular/material/card';
     MatSidenavModule,
     MatTooltipModule,
     MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatChipsModule,
     MatCardModule
   ]
 })
