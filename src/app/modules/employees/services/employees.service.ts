@@ -37,6 +37,10 @@ export class EmployeesService {
     );
   }
 
+  deleteEmployee(employeeId: string | undefined) {
+    return this.db.collection('employees').doc(employeeId).delete();
+  }
+
   openSnackBar(message: string, className: string) {
     this._snackBar.open(message, 'OK', {
       horizontalPosition: 'end',
