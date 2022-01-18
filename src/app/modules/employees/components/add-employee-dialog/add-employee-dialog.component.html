@@ -25,10 +25,10 @@
                 <mat-option value="Full Stack">Full Stack</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="speciality?.value === 'Front End'" appearance="fill">
-            <mat-label>Framework</mat-label>
-            <mat-select formControlName="frontEndFrameworks" multiple>
-                <mat-option *ngFor="let framework of availableFrontEndFrameworks" [value]="framework">{{ framework }}</mat-option>
+        <mat-form-field *ngIf="speciality" appearance="fill">
+            <mat-label>Technologies</mat-label>
+            <mat-select formControlName="technologies" multiple>
+                <mat-option *ngFor="let tech of availableFrontEndFrameworks" [value]="tech">{{ tech }}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
