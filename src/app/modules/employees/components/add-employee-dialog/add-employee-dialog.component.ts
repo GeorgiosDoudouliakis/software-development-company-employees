@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Employee } from '../../models/employee.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -14,7 +13,7 @@ export class AddEmployeeDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: Employee, 
+    @Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
   ) {}
 
@@ -46,7 +45,7 @@ export class AddEmployeeDialogComponent implements OnInit {
     return this.employeeForm.get('projects');
   }
 
-  onAddEmployee() {
+  onAddEditEmployee() {
     this.dialogRef.close({
       firstName: this.capitalizeFirstLetter(this.firstName?.value),
       lastName: this.capitalizeFirstLetter(this.lastName?.value),

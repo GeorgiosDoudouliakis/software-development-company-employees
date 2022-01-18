@@ -41,6 +41,10 @@ export class EmployeesService {
     return this.db.collection('employees').doc(employeeId).delete();
   }
 
+  updateEmployee(employeeId: string | undefined, employee: Employee) {
+    return this.db.collection('employees').doc(employeeId).update({ ...employee });
+  }
+
   openSnackBar(message: string, className: string) {
     this._snackBar.open(message, 'OK', {
       horizontalPosition: 'end',

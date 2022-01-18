@@ -34,7 +34,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   addEmployee() {
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       width: '400px',
-      data: {}
+      data: {
+        action: 'add'
+      }
     })
 
     dialogRef.afterClosed().subscribe((employee: Employee) => {

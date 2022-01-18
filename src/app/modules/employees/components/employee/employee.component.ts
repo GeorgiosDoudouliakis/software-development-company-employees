@@ -27,9 +27,15 @@ export class EmployeeComponent implements OnInit {
   openEdit(employee: Employee) {
     const { firstName, lastName, age, contractType, speciality, projects } = employee;
 
-    this.dialog.open(AddEmployeeDialogComponent, {
+    const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       width: '400px',
-      data: { firstName, lastName, age, contractType, speciality, projects }
+      data: { action: 'edit', firstName, lastName, age, contractType, speciality, projects }
+    })
+
+    dialogRef.afterClosed().subscribe((emp: Employee) => {
+      this.employeesService.updateEmployee(employee.id, emp)
+        .then(_ => this.employeesService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
+        .catch((err: FirebaseError) => this.showErrorMessage(err));
     })
   }
 
