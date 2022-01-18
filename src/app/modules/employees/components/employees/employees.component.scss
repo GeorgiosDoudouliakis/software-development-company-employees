@@ -69,13 +69,17 @@ p {
     }
 }
 
-.add-employee {
+.add-employee-btn {
     margin-bottom: 1rem;
     transition: .4s ease-in-out;
     &:hover {
         width: 150px;
         border-radius: 100px;
     }
+}
+
+.company-details-btn {
+    margin-left: 0.5rem;
 }
 
 .employees-container {

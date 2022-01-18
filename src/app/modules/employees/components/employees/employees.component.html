@@ -14,11 +14,16 @@
         If you want to customize your profile and see the details reflected in the panel click 
         <a href="">here</a>
     </p>
-    <button mat-mini-fab color="accent" class="add-employee" (click)="addEmployee()" 
-    (mouseover)="showAddEmployeeText = true" (mouseleave)="showAddEmployeeText = false">
-        <mat-icon>add</mat-icon>
-        <span *ngIf="showAddEmployeeText">Add Employee</span>
-    </button>
+    <section class="employees-page-action-btns">
+        <button mat-mini-fab color="accent" class="add-employee-btn" (click)="addEmployee()" 
+        (mouseover)="showAddEmployeeText = true" (mouseleave)="showAddEmployeeText = false">
+            <mat-icon>add</mat-icon>
+            <span *ngIf="showAddEmployeeText">Add Employee</span>
+        </button>
+        <button mat-stroked-button color="accent" role="link" class="company-details-btn">
+            Company Details
+        </button>
+    </section>
     <section class="employees-container">
         <ng-container *ngFor="let employee of employees">
             <app-employee [employee]="employee"></app-employee>
