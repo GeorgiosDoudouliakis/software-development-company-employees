@@ -51,7 +51,7 @@ export class AddEmployeeDialogComponent implements OnInit {
     if(speciality === 'Front End') {
       return ['Angular', 'React', 'Vue'];
     } else if(speciality === 'Back End') {
-      return ['Javascript', 'Python', 'PHP', 'Java', 'C Sharp', 'MySQL', 'PostgreSQL', 'MongoDB'];
+      return ['JavaScript', 'Python', 'PHP', 'Java', 'C Sharp', 'MySQL', 'PostgreSQL', 'MongoDB'];
     } else {
       return ['Angular', 'React', 'Vue', 'JavaScript', 'Python', 'PHP', 'Java', 'C Sharp', 'MySQL', 'PostgreSQL', 'MongoDB'];
     }
