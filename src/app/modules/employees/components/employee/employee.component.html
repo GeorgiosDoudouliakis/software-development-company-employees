@@ -6,6 +6,9 @@
     <mat-card-subtitle>{{ employee.speciality }} Developer</mat-card-subtitle>
     <mat-card-content>
         <span>Contract Type: {{ employee.contractType }}</span>
+        <mat-chip-list *ngFor="let project of employee.projects">
+            <mat-chip>{{ project }}</mat-chip>
+        </mat-chip-list>
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-stroked-button color="warn" (click)="onDelete(employee.id)">Delete</button>

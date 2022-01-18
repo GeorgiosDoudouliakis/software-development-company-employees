@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSidenavModule,
     MatTooltipModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule
   ],
   exports: [
     HeaderComponent,
@@ -60,7 +62,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSidenavModule,
     MatTooltipModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule
   ]
 })
 export class SharedModule { }
