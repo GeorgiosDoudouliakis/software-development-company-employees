@@ -2,11 +2,55 @@
 
 :host {
     width: 100%;
-    padding: 2rem;
+    height: 100%;
+}
+
+.brand-container {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    cursor: pointer;
+    .default-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    &:hover::after {
+        opacity: 1;
+        z-index: 1;
+    }
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: -1;
+        color: #69F0AE;
+        background: rgba(0, 0, 0, .8);
+        transition: .4s ease-in-out;
+    }
+}
+
+.customize-brand {
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: -1;
+    &.show {
+        opacity: 1;
+        z-index: 2;
+    }
 }
 
 .employees-page {
-    height: 100%;
+    padding: 2rem;
 }
 
 h2, p {
