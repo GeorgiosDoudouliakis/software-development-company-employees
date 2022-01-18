@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddEmployeeDialogComponent implements OnInit {
   employeeForm: FormGroup;
   availableProjects: string[] = ['Tomi Systems', 'Pure Profile', 'VMWare'];
-  availableFrontEndFrameworks: string[] = ['Angular', 'React', 'Vue'];
 
   constructor(
     private fb: FormBuilder,
@@ -44,6 +43,18 @@ export class AddEmployeeDialogComponent implements OnInit {
   
   get empProjects() {
     return this.employeeForm.get('projects');
+  }
+
+  get techs() {
+    const speciality = this.speciality?.value;
+
+    if(speciality === 'Front End') {
+      return ['Angular', 'React', 'Vue'];
+    } else if(speciality === 'Back End') {
+      return ['Javascript', 'Python', 'PHP', 'Java', 'C Sharp'];
+    } else {
+      return ['Angular', 'React', 'Vue', 'JavaScript', 'Python', 'PHP', 'Java', 'C Sharp'];
+    }
   }
 
   onAddEditEmployee() {

@@ -28,7 +28,7 @@
         <mat-form-field *ngIf="speciality?.value" appearance="fill">
             <mat-label>Technologies</mat-label>
             <mat-select formControlName="technologies" multiple>
-                <mat-option *ngFor="let tech of availableFrontEndFrameworks" [value]="tech">{{ tech }}</mat-option>
+                <mat-option *ngFor="let tech of techs" [value]="tech">{{ tech }}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
