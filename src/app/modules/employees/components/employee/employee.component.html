@@ -1,11 +1,10 @@
 <mat-card>
     <mat-card-title>
         <h3>{{ employee.firstName }} {{ employee.lastName }}</h3>
-        <span>({{ employee.age }})</span>
     </mat-card-title>
-    <mat-card-subtitle>{{ employee.speciality }} Developer</mat-card-subtitle>
+    <mat-card-subtitle>{{ employee.speciality }} Developer ({{ employee.contractType }})</mat-card-subtitle>
     <mat-card-content>
-        <span>Contract Type: {{ employee.contractType }}</span>
+        <span class="projects">Projects:</span>
         <mat-chip-list *ngFor="let project of employee.projects">
             <mat-chip>{{ project }}</mat-chip>
         </mat-chip-list>

@@ -33,11 +33,11 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   openEdit(employee: Employee) {
-    const { firstName, lastName, age, contractType, speciality, projects } = employee;
+    const { firstName, lastName, contractType, speciality, projects } = employee;
 
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       width: '400px',
-      data: { action: 'edit', firstName, lastName, age, contractType, speciality, projects }
+      data: { action: 'edit', firstName, lastName, contractType, speciality, projects }
     })
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {

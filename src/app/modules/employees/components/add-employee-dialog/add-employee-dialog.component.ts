@@ -29,10 +29,6 @@ export class AddEmployeeDialogComponent implements OnInit {
     return this.employeeForm.get('lastName');
   }
 
-  get age() {
-    return this.employeeForm.get('age');
-  }
-
   get contractType() {
     return this.employeeForm.get('contractType');
   }
@@ -49,7 +45,6 @@ export class AddEmployeeDialogComponent implements OnInit {
     this.dialogRef.close({
       firstName: this.capitalizeFirstLetter(this.firstName?.value),
       lastName: this.capitalizeFirstLetter(this.lastName?.value),
-      age: this.age?.value,
       contractType: this.contractType?.value,
       speciality: this.speciality?.value,
       projects: this.empProjects?.value
@@ -60,7 +55,6 @@ export class AddEmployeeDialogComponent implements OnInit {
     this.employeeForm = this.fb.group({
       firstName: this.fb.control(this.data.firstName || '', Validators.required),
       lastName: this.fb.control(this.data.lastName || '', Validators.required),
-      age: this.fb.control(this.data.age || '', Validators.required),
       contractType: this.fb.control(this.data.contractType || '', Validators.required),
       speciality: this.fb.control(this.data.speciality || '', Validators.required),
       projects: this.fb.control(this.data.projects || [], Validators.required),
