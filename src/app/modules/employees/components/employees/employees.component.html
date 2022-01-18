@@ -4,12 +4,10 @@
         If you want to customize your profile and see the details reflected in the panel click 
         <a href="">here</a>
     </p>
+    <button mat-stroked-button color="accent" class="add-employee" (click)="addEmployee()">Add Employee</button>
     <section class="employees-container">
         <ng-container *ngFor="let employee of employees">
             <app-employee [employee]="employee"></app-employee>
         </ng-container>
-    </section>
-    <section class="add-employee">
-        <button mat-stroked-button color="accent" (click)="addEmployee()">Add Employee</button>
     </section>
 </section>
