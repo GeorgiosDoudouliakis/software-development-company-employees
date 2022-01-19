@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-add-employee-dialog',
@@ -9,15 +10,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddEmployeeDialogComponent implements OnInit {
   employeeForm: FormGroup;
-  availableProjects: string[] = ['Tomi Systems', 'Pure Profile', 'VMWare'];
+  availableSpecialities: string[] = [];
+  availableProjects: string[];
 
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any, 
-    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>
+    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
+    private employeesService: EmployeesService
   ) {}
 
   ngOnInit(): void {
+    this.availableSpecialities = this.employeesService.availableSpecialities;
+    this.availableProjects = this.employeesService.availableProjects;
     this.initializeEmployeeForm();
   }
 

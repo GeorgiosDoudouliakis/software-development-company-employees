@@ -23,6 +23,9 @@
             Company Details
         </button>
     </section>
+    <section class="filters">
+        <app-filters></app-filters>
+    </section>
     <section class="employees-container">
         <ng-container *ngFor="let employee of employees">
             <app-employee [employee]="employee"></app-employee>

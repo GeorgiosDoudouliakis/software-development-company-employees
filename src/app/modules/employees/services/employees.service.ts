@@ -9,6 +9,8 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EmployeesService {
+  availableSpecialities: string[] = ['Front End', 'Back End', 'Full Stack'];
+  availableProjects: string[] = ['Tomi Systems', 'Pure Profile', 'VMWare'];
 
   constructor(
     private afAuth: AngularFireAuth, 

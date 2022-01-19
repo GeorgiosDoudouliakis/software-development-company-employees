@@ -20,9 +20,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Speciality</mat-label>
             <mat-select formControlName="speciality">
-                <mat-option value="Front End">Front End</mat-option>
-                <mat-option value="Back End">Back End</mat-option>
-                <mat-option value="Full Stack">Full Stack</mat-option>
+                <mat-option *ngFor="let speciality of availableSpecialities" [value]="speciality">{{ speciality }}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field *ngIf="speciality?.value" appearance="fill">

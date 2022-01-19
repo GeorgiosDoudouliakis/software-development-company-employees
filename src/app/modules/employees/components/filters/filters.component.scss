@@ -1,0 +1,31 @@
+@import 'src/styles';
+
+.filters {
+    @include flex(row, nowrap, space-between, center);
+    margin-bottom: 1rem;
+    span {
+        font-size: 1.2rem;
+        color: white;
+    }
+    .line {
+        @include flex(row, nowrap, center, center);
+        width: 50%;
+        height: 1px;
+        background: rgb(160, 160, 160);
+    }
+}
+
+.filters-container {
+    @include flex(row, nowrap, center, center);
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+    &:last-of-type {
+        margin-left: 0.5rem;
+    }
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    bottom: 0;
+}
