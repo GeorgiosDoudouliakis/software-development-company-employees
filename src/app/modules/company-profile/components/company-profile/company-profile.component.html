@@ -1,49 +1,53 @@
 <section class="company-profile-page animate__animated animate__backInDown">
     <h2>COMPANY PROFILE</h2>
-    <form>
         <div class="fields-wrapper">
             <mat-form-field appearance="fill">
                 <mat-label>Brand Name</mat-label>
-                <input matInput type="text" autocomplete="off" required>
+                <input matInput type="text" [(ngModel)]="name" autocomplete="off" required>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Founder</mat-label>
-                <input matInput type="text" autocomplete="off" required>
+                <input matInput type="text" [(ngModel)]="founder" autocomplete="off" required>
             </mat-form-field>
         </div>
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <textarea matInput class="textarea-field" required></textarea>
+            <textarea matInput class="textarea-field" [(ngModel)]="description" required></textarea>
         </mat-form-field>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Services
+                Services ({{ services?.length }})
               </mat-panel-title>
             </mat-expansion-panel-header>
             <section class="add-service">
                 <span>Add service</span>
                 <mat-icon>add</mat-icon>
             </section>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let service of services">{{ service }}</mat-list-item>
+            </mat-list>
         </mat-expansion-panel>        
         <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Projects
+                Projects ({{ projects?.length }})
               </mat-panel-title>
             </mat-expansion-panel-header>
             <section class="add-project">
                 <span>Add project</span>
                 <mat-icon>add</mat-icon>
             </section>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let project of projects">{{ project }}</mat-list-item>
+            </mat-list>
         </mat-expansion-panel>
         <section class="choose-logo">
             <span>Choose logo for your company</span>
-            <input type="file" />
+            <input type="file" [(ngModel)]="logo" required />
         </section>        
         <section class="action-btns">
-            <button mat-stroked-button color="accent">Clear</button>
+            <button mat-stroked-button color="accent" (click)="clearFields()">Clear</button>
             <button mat-raised-button class="submit-btn" color="primary">Submit</button>
         </section>
-    </form>
 </section>
