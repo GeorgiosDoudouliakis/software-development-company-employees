@@ -14,6 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
   employees: Employee[];
+  isFiltered: boolean = false;
+  filteredEmployees: Employee[] | null = null;
   private destroy$ = new Subject();
 
   constructor(private dialog: MatDialog, public employeesService: EmployeesService) { }
@@ -46,6 +48,15 @@ export class EmployeesComponent implements OnInit, OnDestroy {
           .catch((err: FirebaseError) => this.showErrorMessage(err));
       }
     })
+  }
+
+  filterByProject(project: string | 'All') { // TODO: TYPE
+    this.isFiltered = true;
+    if(project === 'All') {
+      this.filteredEmployees = this.employees;
+      return;
+    }
+    this.filteredEmployees = this.employees.filter((emp: Employee) => emp.projects?.includes(project));
   }
 
   private showErrorMessage(err: FirebaseError) {

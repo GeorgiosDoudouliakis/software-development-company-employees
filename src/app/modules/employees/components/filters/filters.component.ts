@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({
@@ -8,14 +8,12 @@ import { EmployeesService } from '../../services/employees.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FiltersComponent implements OnInit {
-  availableSpecialities: string[] = [];
   availableProjects: string[];
+  @Output() selectedProjectHandler = new EventEmitter();
 
   constructor(private employeesService: EmployeesService) { }
 
   ngOnInit(): void {
-    this.availableSpecialities = this.employeesService.availableSpecialities;
     this.availableProjects = this.employeesService.availableProjects;
   }
-
 }

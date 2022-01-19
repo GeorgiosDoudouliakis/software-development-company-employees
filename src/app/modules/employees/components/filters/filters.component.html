@@ -3,14 +3,9 @@
     <div class="line"></div>
     <section class="filters-container">
         <mat-form-field appearance="fill">
-            <mat-label>Speciality</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let speciality of availableSpecialities" [value]="speciality">{{ speciality }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
             <mat-label>Project</mat-label>
-            <mat-select>
+            <mat-select value="All" (selectionChange)="selectedProjectHandler.emit($event.value)">
+              <mat-option value="All">All</mat-option>
               <mat-option *ngFor="let project of availableProjects" [value]="project">{{ project }}</mat-option>
             </mat-select>
         </mat-form-field>

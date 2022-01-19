@@ -24,11 +24,18 @@
         </button>
     </section>
     <section class="filters">
-        <app-filters></app-filters>
+        <app-filters (selectedProjectHandler)="filterByProject($event)"></app-filters>
     </section>
     <section class="employees-container">
-        <ng-container *ngFor="let employee of employees">
-            <app-employee [employee]="employee"></app-employee>
+        <ng-container *ngIf="!isFiltered; else filtered">
+            <ng-container *ngFor="let employee of employees">
+                <app-employee [employee]="employee"></app-employee>
+            </ng-container>
         </ng-container>
+        <ng-template #filtered>
+            <ng-container *ngFor="let employee of filteredEmployees">
+                <app-employee [employee]="employee"></app-employee>
+            </ng-container>
+        </ng-template>
     </section>
 </section>

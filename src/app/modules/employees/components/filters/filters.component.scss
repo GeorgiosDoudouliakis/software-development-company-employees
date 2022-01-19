@@ -21,9 +21,6 @@
 
 :host ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0;
-    &:last-of-type {
-        margin-left: 0.5rem;
-    }
 }
 
 :host ::ng-deep .mat-form-field-underline {
