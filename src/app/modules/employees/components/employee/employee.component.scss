@@ -28,6 +28,15 @@
     margin-bottom: 1rem;
 }
 
+.tech-chip > img {
+    margin-right: 0.3rem;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+    display: inline-flex !important;
+    margin: 0 !important;
+}
+
 .projects {
     display: inline-block;
     font-size: 1rem;
