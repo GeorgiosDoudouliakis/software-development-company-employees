@@ -13,7 +13,7 @@
 
 .mat-card-subtitle {
     padding-bottom: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid rgb(160, 160, 160);
     &:not(:first-child) {
         margin-top: 0;
@@ -34,15 +34,22 @@
     margin-bottom: 0.5rem;
 }
 
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
 .mat-list-base {
+    text-align: center;
     padding-top: 0;
-    margin-bottom: 5px;
     background: #69F0AE;
     border-radius: 4px;
 }
 
 ::ng-deep .mat-list-item-content {
     font-weight: 500;
+    justify-content: center;
     color: black;
 }
 

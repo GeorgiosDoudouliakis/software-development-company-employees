@@ -14,9 +14,11 @@
         </section>
         <section class="projects-container">
             <span class="projects">Projects:</span>
-            <mat-list role="list" *ngFor="let project of employee.projects">
-                <mat-list-item role="listitem">{{ project }}</mat-list-item>
-            </mat-list>
+            <section class="projects-list">
+                <mat-list role="list" *ngFor="let project of employee.projects">
+                    <mat-list-item role="listitem">{{ project }}</mat-list-item>
+                </mat-list>
+            </section>
         </section>
     </mat-card-content>
     <mat-card-actions align="end">
