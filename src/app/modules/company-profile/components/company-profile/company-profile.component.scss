@@ -1,0 +1,64 @@
+@import 'src/styles';
+
+:host {
+    width: 100%;
+    padding: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.fields-wrapper {
+    @include flex(row, nowrap, flex-start, center);
+    mat-form-field {
+        &:last-of-type {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.textarea-field {
+    height: 100px;
+}
+
+mat-expansion-panel {
+    margin-bottom: 1rem;
+}
+
+.add-service,
+.add-project {
+    @include flex(row, nowrap, space-between, center);
+    padding: 0.5rem;
+    border: 1px solid #69F0AE;
+    mat-icon {
+        cursor: pointer;
+    }
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+    margin-right: 1rem;
+}
+
+.choose-logo {
+    span {
+        font-size: 1.2rem;
+        color: white;
+    }
+    input {
+        padding: 0.5rem;
+        margin-left: 1rem;
+        background: #69F0AE;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
+
+.action-btns {
+    @include flex(row, nowrap, flex-end, center);
+    .submit-btn {
+        margin-left: 0.5rem;
+    }
+}

@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatCardModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ],
   exports: [
     HeaderComponent,
@@ -66,7 +68,8 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatCardModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }

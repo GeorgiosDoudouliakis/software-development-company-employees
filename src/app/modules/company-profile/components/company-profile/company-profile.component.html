@@ -1,1 +1,49 @@
-<p>company-profile works!</p>
+<section class="company-profile-page animate__animated animate__backInDown">
+    <h2>COMPANY PROFILE</h2>
+    <form>
+        <div class="fields-wrapper">
+            <mat-form-field appearance="fill">
+                <mat-label>Brand Name</mat-label>
+                <input matInput type="text" autocomplete="off" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Founder</mat-label>
+                <input matInput type="text" autocomplete="off" required>
+            </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput class="textarea-field" required></textarea>
+        </mat-form-field>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Services
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section class="add-service">
+                <span>Add service</span>
+                <mat-icon>add</mat-icon>
+            </section>
+        </mat-expansion-panel>        
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Projects
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section class="add-project">
+                <span>Add project</span>
+                <mat-icon>add</mat-icon>
+            </section>
+        </mat-expansion-panel>
+        <section class="choose-logo">
+            <span>Choose logo for your company</span>
+            <input type="file" />
+        </section>        
+        <section class="action-btns">
+            <button mat-stroked-button color="accent">Clear</button>
+            <button mat-raised-button class="submit-btn" color="primary">Submit</button>
+        </section>
+    </form>
+</section>
