@@ -26,6 +26,7 @@
     <section class="filters">
         <app-filters (selectedProjectHandler)="filterByProject($event)"></app-filters>
     </section>
+    <p class="no-employees">{{ (employees.length === 0 || filteredEmployees?.length === 0) ? 'No employees found!' : '' }}</p>
     <section class="employees-container">
         <ng-container *ngIf="!isFiltered; else filtered">
             <ng-container *ngFor="let employee of employees">

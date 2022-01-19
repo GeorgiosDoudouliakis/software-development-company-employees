@@ -88,6 +88,11 @@ p {
     margin-left: 0.5rem;
 }
 
+.no-employees {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
 .employees-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
