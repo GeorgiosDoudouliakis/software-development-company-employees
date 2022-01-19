@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTooltipModule,
     MatSelectModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatListModule
   ],
   exports: [
     HeaderComponent,
@@ -63,7 +65,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTooltipModule,
     MatSelectModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

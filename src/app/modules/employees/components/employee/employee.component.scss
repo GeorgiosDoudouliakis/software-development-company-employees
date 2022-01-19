@@ -20,18 +20,30 @@
     }
 }
 
-.mat-card-content, 
-.technologies-container {
+.mat-card-content {
     margin-bottom: 10px;
 }
 
-.tech-chip > img {
-    margin-right: 0.3rem;
+.technologies-container {
+    margin-bottom: 1rem;
 }
 
-::ng-deep .mat-chip-list-wrapper {
-    display: inline-flex !important;
-    margin: 0 !important;
+.projects {
+    display: inline-block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.mat-list-base {
+    padding-top: 0;
+    margin-bottom: 5px;
+    background: #69F0AE;
+    border-radius: 4px;
+}
+
+::ng-deep .mat-list-item-content {
+    font-weight: 500;
+    color: black;
 }
 
 .mat-card-actions {
