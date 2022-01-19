@@ -25,16 +25,6 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  saveToken() {
-    this.afAuth.idToken.subscribe(token => {
-      if(token) localStorage.setItem('token', token);
-    });
-  }
-
-  clearToken() {
-    localStorage.clear();
-  }
-
   openSnackBar(message: string, className: string) {
     this._snackBar.open(message, 'OK', {
       horizontalPosition: 'end',

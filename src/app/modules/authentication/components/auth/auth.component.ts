@@ -101,7 +101,6 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private onSuccess(msg: string) {
     this.authService.openSnackBar(msg, 'success');
-    this.authService.saveToken();
     this.router.navigate(['/employees']);
   }
 
