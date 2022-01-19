@@ -41,9 +41,11 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     })
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {
-      this.employeesService.updateEmployee(employee.id, emp)
+      if(emp) {
+        this.employeesService.updateEmployee(employee.id, emp)
         .then(_ => this.employeesService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
         .catch((err: FirebaseError) => this.showErrorMessage(err));
+      }
     })
   }
 
