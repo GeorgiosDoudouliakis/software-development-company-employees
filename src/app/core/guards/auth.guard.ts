@@ -16,15 +16,15 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    const user = from(this.afAuth.currentUser);
+  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    const user = await this.afAuth.currentUser;
     const isLoggedin = !!user;
 
     if(!isLoggedin) {
-      this.router.navigate(['/'], { relativeTo: this.route });
+      this.router.navigate(['/auth/login']);
       this.authService.openSnackBar('You have no permission to access this link. Please log in!', 'error');
     } 
     
-    return of(isLoggedin);
+    return isLoggedin;
   }
 }
