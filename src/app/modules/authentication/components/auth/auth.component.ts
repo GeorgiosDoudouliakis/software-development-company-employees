@@ -103,6 +103,6 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private onSuccess(msg: string) {
     this.sharedMethodsService.openSnackBar(msg, 'success');
-    this.router.navigate(['/employees']);
+    this.router.navigate(['/company-profile']);
   }
 }
