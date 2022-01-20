@@ -15,7 +15,7 @@ export class GetCompanyService {
     return this.afAuth.authState.pipe(
       switchMap((user: any) => {
         if(user) {
-          return this.db.collection<Company>('companies', (ref: any) => ref.where('uid', '==', user.uid))
+          return this.db.collection<Company[]>('companies', (ref: any) => ref.where('uid', '==', user.uid))
                         .valueChanges({ idField: 'id' });
         } else {
           return [];
