@@ -20,6 +20,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   services: string[];
   projects: string[];
   logo: string;
+  companyId: string;
   private destroy$ = new Subject()
 
   constructor(
@@ -31,19 +32,29 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((company: any) => {
-      const { name, founder, description, services, projects, logo } = company[0];
+      const { name, founder, description, services, projects, logo, id } = company[0];
       this.name = name || '';
       this.founder = founder || '';
       this.description = description || '';
       this.services = services || [];
       this.projects = projects || [];
       this.logo = logo || '';
+      this.companyId = id;
     });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  get companyActionButton() {
+    if(this.name === '' && this.founder === '' && this.description === '' && this.services.length === 0 && this.projects.length === 0 && this.logo === '') {
+      return 'Submit';
+    } else if(this.name !== '' && this.founder !== '' && this.description !== '' && this.services.length > 0 && this.projects.length > 0 && this.logo !== '') {
+      return 'Update';
+    }
+    return '';
   }
 
   onAdd(type: 'service' | 'project') {
@@ -75,7 +86,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if(this.name && this.founder && this.description && this.services.length > 0 && this.projects.length > 0 && this.logo) {
+    if(this.companyActionButton === 'Submit' && this.isValid()) {
       this.companyProfileActionsService.addCompany({
         name: this.name,
         founder: this.founder,
@@ -85,6 +96,26 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         logo: this.logo
       }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
+    } else if(this.companyActionButton === 'Update' && this.isValid()) {
+      this.companyProfileActionsService.updateCompany(this.companyId, {
+        name: this.name,
+        founder: this.founder,
+        description: this.description,
+        services: this.services,
+        projects: this.projects,
+        logo: this.logo
+      }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully updated!", "success"))
+        .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     }
+  }
+
+  private isValid() {
+    return (this.name 
+            && this.founder 
+            && this.description 
+            && this.services.length > 0 
+            && this.projects.length > 0 
+            && this.logo
+    );
   }
 }
