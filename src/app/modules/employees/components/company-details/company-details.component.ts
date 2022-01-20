@@ -27,8 +27,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   getCompany() {
     this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
       if(companies.length > 0) {
-        const { name, founder, description, services, projects, logo } = companies[0];
-        this.company = { name, founder, description, services, projects, logo };
+        const { name, founder, description, services, projects } = companies[0];
+        this.company = { name, founder, description, services, projects };
       }
     })
   }

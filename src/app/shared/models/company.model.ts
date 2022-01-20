@@ -4,6 +4,5 @@ export interface Company {
     description?: string;
     services?: string[];
     projects?: string[];
-    logo?: string;
     id?: string;
 }

@@ -60,20 +60,6 @@ mat-expansion-panel {
     color: white;
 }
 
-.choose-logo {
-    span {
-        font-size: 1.2rem;
-        color: white;
-    }
-    input {
-        padding: 0.5rem;
-        margin-left: 1rem;
-        background: #69F0AE;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-}
-
 .action-btns {
     @include flex(row, nowrap, flex-end, center);
     .submit-btn {
