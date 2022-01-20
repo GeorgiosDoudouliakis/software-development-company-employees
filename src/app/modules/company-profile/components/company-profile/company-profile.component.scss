@@ -57,6 +57,7 @@ mat-expansion-panel {
     @include flex(row, nowrap, space-between, center);
     width: 100%;
     padding: 0 8px !important;
+    color: white;
 }
 
 .choose-logo {
