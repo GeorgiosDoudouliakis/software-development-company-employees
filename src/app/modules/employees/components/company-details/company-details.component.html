@@ -18,7 +18,7 @@
     <section class="projects">
         <span>Projects</span>
         <ul>
-            <li *ngIf="company?.projects?.length === 0">No porjects added yet</li>
+            <li *ngIf="company?.projects?.length === 0">No projects added yet</li>
             <li *ngFor="let project of company?.projects">{{ project }}</li>
         </ul>
     </section>
