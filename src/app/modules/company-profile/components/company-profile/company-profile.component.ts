@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { GetCompanyService } from '@shared/services/get-company.service';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { FirebaseError } from '@firebase/util';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { CompanyProfileActionsService } from '../../services/company-profile-actions.service';
 import { AddServiceProjectDialogComponent } from '../add-service-project-dialog/add-service-project-dialog.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-company-profile',
@@ -19,7 +20,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   services: string[];
   projects: string[];
   logo: string;
-  private companySub$: Subscription;
+  private destroy$ = new Subject()
 
   constructor(
     private getCompanyService: GetCompanyService, 
@@ -29,7 +30,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.companySub$ = this.getCompanyService.company.subscribe((company: any) => {
+    this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((company: any) => {
       const { name, founder, description, services, projects, logo } = company[0];
       this.name = name || '';
       this.founder = founder || '';
@@ -41,7 +42,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.companySub$?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onAdd(type: 'service' | 'project') {
@@ -52,7 +54,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       data
     })
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(res => {
       if(res) {
         if(type === 'service') {
           this.services.push(res);
