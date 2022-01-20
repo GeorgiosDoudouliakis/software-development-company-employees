@@ -49,9 +49,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   get companyActionButton() {
-    if(this.name === '' && this.founder === '' && this.description === '' && this.services.length === 0 && this.projects.length === 0 && this.logo === '') {
+    if(this.name === '' && this.founder === '' && this.description === '' && this.services?.length === 0 && this.projects?.length === 0 && this.logo === '') {
       return 'Submit';
-    } else if(this.name !== '' && this.founder !== '' && this.description !== '' && this.services.length > 0 && this.projects.length > 0 && this.logo !== '') {
+    } else if(this.name !== '' && this.founder !== '' && this.description !== '' && this.services?.length > 0 && this.projects?.length > 0 && this.logo !== '') {
       return 'Update';
     }
     return '';
@@ -113,8 +113,8 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     return (this.name 
             && this.founder 
             && this.description 
-            && this.services.length > 0 
-            && this.projects.length > 0 
+            && this.services?.length > 0 
+            && this.projects?.length > 0 
             && this.logo
     );
   }
