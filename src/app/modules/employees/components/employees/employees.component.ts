@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { GetCompanyService } from '@shared/services/get-company.service';
+import { CompanyDetailsComponent } from '../company-details/company-details.component';
 
 @Component({
   selector: 'app-employees',
@@ -18,8 +19,6 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   companyName: string;
   companyDescription: string;
   employees: Employee[];
-  isFiltered: boolean = false;
-  filteredEmployees: Employee[] | null = null;
   private destroy$ = new Subject();
 
   constructor(
@@ -68,12 +67,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     })
   }
 
-  filterByProject(project: string | 'All') { // TODO: TYPE
-    this.isFiltered = true;
-    if(project === 'All') {
-      this.filteredEmployees = this.employees;
-      return;
-    }
-    this.filteredEmployees = this.employees.filter((emp: Employee) => emp.projects?.includes(project));
+  openCompanyDetailsDialog() {
+    this.dialog.open(CompanyDetailsComponent, { width: '400px' });
   }
 }
