@@ -30,13 +30,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.companySub$ = this.getCompanyService.company.subscribe((company: any) => {
-       const { name, founder, description, services, projects, logo } = company;
-       this.name = name || '';
-       this.founder = founder || '';
-       this.description = description || '';
-       this.services = services || [];
-       this.projects = projects || [];
-       this.logo = logo || '';
+      const { name, founder, description, services, projects, logo } = company[0];
+      this.name = name || '';
+      this.founder = founder || '';
+      this.description = description || '';
+      this.services = services || [];
+      this.projects = projects || [];
+      this.logo = logo || '';
     });
   }
 
