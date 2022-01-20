@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { GetCompanyService } from '@shared/services/get-company.service';
 import { Subscription } from 'rxjs';
+import { AddServiceProjectDialogComponent } from '../add-service-project-dialog/add-service-project-dialog.component';
 
 @Component({
   selector: 'app-company-profile',
@@ -16,7 +18,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   logo: string;
   private companySub$: Subscription;
 
-  constructor(private getCompanyService: GetCompanyService) { }
+  constructor(private getCompanyService: GetCompanyService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.companySub$ = this.getCompanyService.company.subscribe((company: any) => {
@@ -32,6 +34,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.companySub$?.unsubscribe();
+  }
+
+  onAdd(type: 'service' | 'project') {
+    const data = type === 'service' ? { type, service: '' } : { type, project: '' };
+
+    const dialogRef = this.dialog.open(AddServiceProjectDialogComponent, {
+      width: '350px',
+      data
+    })
   }
 
   clearFields() {

@@ -22,7 +22,7 @@
             </mat-expansion-panel-header>
             <section class="add-service">
                 <span>Add service</span>
-                <mat-icon>add</mat-icon>
+                <mat-icon (click)="onAdd('service')">add</mat-icon>
             </section>
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let service of services">{{ service }}</mat-list-item>
@@ -36,7 +36,7 @@
             </mat-expansion-panel-header>
             <section class="add-project">
                 <span>Add project</span>
-                <mat-icon>add</mat-icon>
+                <mat-icon (click)="onAdd('project')">add</mat-icon>
             </section>
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let project of projects">{{ project }}</mat-list-item>
