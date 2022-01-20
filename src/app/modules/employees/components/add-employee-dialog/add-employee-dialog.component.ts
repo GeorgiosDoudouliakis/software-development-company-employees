@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../../services/employees.service';
+import { SharedMethodsService } from '@shared/services/shared-methods.service';
 
 @Component({
   selector: 'app-add-employee-dialog',
@@ -17,7 +18,8 @@ export class AddEmployeeDialogComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
-    private employeesService: EmployeesService
+    private employeesService: EmployeesService,
+    private sharedMethodsService: SharedMethodsService
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +66,8 @@ export class AddEmployeeDialogComponent implements OnInit {
 
   onAddEditEmployee() {
     this.dialogRef.close({
-      firstName: this.capitalizeFirstLetter(this.firstName?.value),
-      lastName: this.capitalizeFirstLetter(this.lastName?.value),
+      firstName: this.sharedMethodsService.capitalizeFirstLetter(this.firstName?.value),
+      lastName: this.sharedMethodsService.capitalizeFirstLetter(this.lastName?.value),
       contractType: this.contractType?.value,
       speciality: this.speciality?.value,
       technologies: this.technologies?.value,
@@ -82,9 +84,5 @@ export class AddEmployeeDialogComponent implements OnInit {
       technologies: this.fb.control(this.data.technologies || [], Validators.required),
       projects: this.fb.control(this.data.projects || [], Validators.required),
     })
-  }
-
-  private capitalizeFirstLetter(input: string) {
-    return input.charAt(0).toUpperCase() + input.slice(1);
   }
 }

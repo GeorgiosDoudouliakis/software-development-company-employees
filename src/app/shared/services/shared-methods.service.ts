@@ -21,6 +21,10 @@ export class SharedMethodsService {
     this.openSnackBar(this.authenticationError(err.message), 'error');
   }
 
+  capitalizeFirstLetter(input: string) {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+  }
+
   private authenticationError(error: string) {
     // Firebase error is something like: Firebase: Password should be at least 6 characters (auth/weak-password) and
     // we want to show: Weak password
