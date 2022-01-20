@@ -40,9 +40,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
   getCompanyDetails() {
     this.getCompanyService.company.pipe(takeUntil(this.destroy$))
-        .subscribe((company: any) => { 
-          this.companyName = company[0].name;
-          this.companyDescription = company[0].description;
+        .subscribe((companies: any) => {
+          if(companies.length > 0) {
+            this.companyName = companies[0].name;
+            this.companyDescription = companies[0].description;
+          }
         });
   }
 

@@ -14,11 +14,11 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit, OnDestroy {
-  name: string;
-  founder: string;
-  description: string;
-  services: string[];
-  projects: string[];
+  name: string = '';
+  founder: string = '';
+  description: string = '';
+  services: string[] = [];
+  projects: string[] = [];
   companyId: string;
   private destroy$ = new Subject()
 
@@ -30,14 +30,16 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((company: any) => {
-      const { name, founder, description, services, projects, id } = company[0];
-      this.name = name || '';
-      this.founder = founder || '';
-      this.description = description || '';
-      this.services = services || [];
-      this.projects = projects || [];
-      this.companyId = id;
+    this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
+      if(companies.length > 0) {
+        const { name, founder, description, services, projects, id } = companies[0];
+        this.name = name || '';
+        this.founder = founder || '';
+        this.description = description || '';
+        this.services = services || [];
+        this.projects = projects || [];
+        this.companyId = id;
+      }
     });
   }
 
@@ -47,12 +49,10 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   get companyActionButton() {
-    if(this.name === '' && this.founder === '' && this.description === '' && this.services?.length === 0 && this.projects?.length === 0) {
-      return 'Submit';
-    } else if(this.name !== '' && this.founder !== '' && this.description !== '' && this.services?.length > 0 && this.projects?.length > 0) {
+    if(this.companyId) {
       return 'Update';
     }
-    return '';
+    return 'Submit';
   }
 
   onAdd(type: 'service' | 'project') {
@@ -74,6 +74,14 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     })
   }
 
+  onDelete(type: 'service' | 'project', index: number) {
+    if(type === 'service') {
+      this.services.splice(index, 1);
+    } else if(type === 'project') {
+      this.projects.splice(index, 1);
+    }
+  }
+
   clearFields() {
     this.name = '';
     this.founder = '';
@@ -83,7 +91,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if(this.companyActionButton === 'Submit' && this.isValid()) {
+    if(!this.companyId) {
       this.companyProfileActionsService.addCompany({
         name: this.name,
         founder: this.founder,
@@ -92,7 +100,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         projects: this.projects
       }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
-    } else if(this.companyActionButton === 'Update' && this.isValid()) {
+    } else {
       this.companyProfileActionsService.updateCompany(this.companyId, {
         name: this.name,
         founder: this.founder,
@@ -102,14 +110,5 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully updated!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     }
-  }
-
-  private isValid() {
-    return (this.name 
-            && this.founder 
-            && this.description 
-            && this.services?.length > 0 
-            && this.projects?.length > 0 
-    );
   }
 }

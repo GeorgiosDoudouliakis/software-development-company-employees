@@ -28,10 +28,10 @@
                 </mat-icon>
             </section>
             <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let service of services">
+                <mat-list-item role="listitem" *ngFor="let service of services; let i = index">
                     <span>{{ service }}</span>
                     <mat-icon matTooltip="Delete Service" matTooltipPosition="below" 
-                    [matTooltipClass]="['tooltip']">
+                    [matTooltipClass]="['tooltip']" (click)="onDelete('service', i)">
                         delete
                     </mat-icon>
                 </mat-list-item>
@@ -51,10 +51,10 @@
                 </mat-icon>
             </section>
             <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let project of projects">
+                <mat-list-item role="listitem" *ngFor="let project of projects; let i = index">
                     <span>{{ project }}</span>
                     <mat-icon matTooltip="Delete Project" matTooltipPosition="below" 
-                    [matTooltipClass]="['tooltip']">
+                    [matTooltipClass]="['tooltip']" (click)="onDelete('project', i)">
                         delete
                     </mat-icon>
                 </mat-list-item>
