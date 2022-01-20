@@ -7,6 +7,7 @@ import { FirebaseError } from '@firebase/util';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SharedMethodsService } from '@shared/services/shared-methods.service';
 
 @Component({
   selector: 'app-auth',
@@ -25,7 +26,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     private fb: FormBuilder, 
     public router: Router, 
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private sharedMethodsService: SharedMethodsService
   ) { }
 
   ngOnInit(): void {
@@ -76,8 +78,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(email => {
       if(email) {
         this.authService.passwordReset(email)
-        .then(_ => this.authService.openSnackBar('An email for password reset has been sent to you!', 'info'))
-        .catch((err: FirebaseError) => this.showErrorMessage(err));
+        .then(_ => this.sharedMethodsService.openSnackBar('An email for password reset has been sent to you!', 'info'))
+        .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }
     });
   }
@@ -91,20 +93,16 @@ export class AuthComponent implements OnInit, OnDestroy {
     && this.password?.value === this.confirmPassword?.value) {
       this.authService.signUp(email, password)
         .then(_ => this.onSuccess('You have successfully signed in!'))
-        .catch((err: FirebaseError) => this.showErrorMessage(err));
+        .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     } else if(this.authType === 'login') {
       this.authService.logIn(email, password)
         .then(_ => this.onSuccess('You are now logged in!'))
-        .catch((err: FirebaseError) => this.showErrorMessage(err));
+        .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     }
   }
 
   private onSuccess(msg: string) {
-    this.authService.openSnackBar(msg, 'success');
+    this.sharedMethodsService.openSnackBar(msg, 'success');
     this.router.navigate(['/employees']);
-  }
-
-  private showErrorMessage(err: FirebaseError) {
-    this.authService.openSnackBar(this.authService.authenticationError(err.message), 'error');
   }
 }

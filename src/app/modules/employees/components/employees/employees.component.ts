@@ -6,6 +6,7 @@ import { EmployeesService } from '../../services/employees.service';
 import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SharedMethodsService } from '@shared/services/shared-methods.service';
 
 @Component({
   selector: 'app-employees',
@@ -18,7 +19,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   filteredEmployees: Employee[] | null = null;
   private destroy$ = new Subject();
 
-  constructor(private dialog: MatDialog, public employeesService: EmployeesService) { }
+  constructor(
+    private dialog: MatDialog, 
+    public employeesService: EmployeesService,
+    private sharedMethodsService: SharedMethodsService
+  ) { }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -44,8 +49,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((employee: Employee) => {
       if(employee) {
         this.employeesService.addEmployee(employee)
-          .then(_ => this.employeesService.openSnackBar('Employee succesfully added', 'success'))
-          .catch((err: FirebaseError) => this.showErrorMessage(err));
+          .then(_ => this.sharedMethodsService.openSnackBar('Employee succesfully added', 'success'))
+          .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }
     })
   }
@@ -57,9 +62,5 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       return;
     }
     this.filteredEmployees = this.employees.filter((emp: Employee) => emp.projects?.includes(project));
-  }
-
-  private showErrorMessage(err: FirebaseError) {
-    this.employeesService.openSnackBar(this.employeesService.authenticationError(err.message), 'error');
   }
 }

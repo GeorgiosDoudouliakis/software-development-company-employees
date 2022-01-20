@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseError } from '@firebase/util';
+import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Employee } from '../../models/employee.model';
@@ -17,7 +18,11 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   @Input() employee: Employee;
   private destroy$ = new Subject();
 
-  constructor(private employeesService: EmployeesService, private dialog: MatDialog) { }
+  constructor(
+    private employeesService: EmployeesService, 
+    private dialog: MatDialog,
+    private sharedMethodsService: SharedMethodsService
+  ) { }
 
   ngOnInit(): void {}
 
@@ -28,8 +33,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   onDelete(employeeId: string | undefined) {
     this.employeesService.deleteEmployee(employeeId)
-      .then(_ => this.employeesService.openSnackBar('Employee has been successfully deleted!', 'success'))
-      .catch((err: FirebaseError) => this.showErrorMessage(err))
+      .then(_ => this.sharedMethodsService.openSnackBar('Employee has been successfully deleted!', 'success'))
+      .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err))
   }
 
   openEdit(employee: Employee) {
@@ -43,13 +48,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {
       if(emp) {
         this.employeesService.updateEmployee(employee.id, emp)
-        .then(_ => this.employeesService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
-        .catch((err: FirebaseError) => this.showErrorMessage(err));
+        .then(_ => this.sharedMethodsService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
+        .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }
     })
-  }
-
-  private showErrorMessage(err: FirebaseError) {
-    this.employeesService.openSnackBar(this.employeesService.authenticationError(err.message), 'error');
   }
 }
