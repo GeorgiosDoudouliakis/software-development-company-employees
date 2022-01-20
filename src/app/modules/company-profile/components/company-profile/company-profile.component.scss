@@ -37,6 +37,7 @@ mat-expansion-panel {
     @include flex(row, nowrap, space-between, center);
     padding: 0.5rem;
     border: 1px solid rgb(160, 160, 160);
+    border-radius: 4px;
 }
 
 :host ::ng-deep .mat-expansion-indicator {
@@ -47,10 +48,8 @@ mat-expansion-panel {
     padding-top: 0 !important;
 }
 
-.mat-list-item {
-    border-right: 1px solid rgb(160, 160, 160);
-    border-bottom: 1px solid rgb(160, 160, 160);
-    border-left: 1px solid rgb(160, 160, 160);
+.mat-list-item:not(:last-of-type) {
+    border-bottom: 1px solid #69F0AE;
 }
 
 :host ::ng-deep .mat-list-item-content {
