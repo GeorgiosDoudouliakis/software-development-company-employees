@@ -1,12 +1,12 @@
-<h3 mat-dialog-title>Company Details ({{ company?.name }})</h3>
+<h3 mat-dialog-title>Company Details {{ company?.name ? (company?.name) : '' }}</h3>
 <mat-dialog-content class="mat-typography">
     <p>
         <span>Founder:</span>
-        <span>{{ company?.founder }}</span>
+        <span>{{ company?.founder || 'No founder added yet' }}</span>
     </p>
     <p>
         <span>Description:</span>
-        <span>{{ company?.description }}</span>
+        <span>{{ company?.description || 'No description added yet' }}</span>
     </p>
     <section class="services">
         <span>Services</span>
