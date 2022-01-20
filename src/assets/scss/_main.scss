@@ -46,6 +46,10 @@ a {
     color: #69f0ae !important;
 }
 
+.mat-dialog-actions {
+    padding: 0 0 8px 0;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
