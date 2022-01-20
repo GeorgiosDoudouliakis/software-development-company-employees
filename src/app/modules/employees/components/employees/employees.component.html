@@ -1,12 +1,8 @@
-<section class="brand-container animate__animated animate__bounceIn animate__delay-1s" appShowCustomizeBtn>
+<section class="brand-container animate__animated animate__bounceIn animate__delay-1s">
     <picture>
         <source type="image/webp" srcset="assets/images/employees_page_default.webp" />
         <img src="assets/images/employees_page_default.jpg" class="default-img" />
     </picture>
-    <button mat-raised-button color="accent" role="link" class="customize-brand" 
-    matTooltip="Add company's logo and name" matTooltipPosition="below" [matTooltipClass]="['tooltip']">
-        Customize
-    </button>
     <section class="company-details" *ngIf="companyName">
         <h3>{{ companyName }}</h3>
         <p>{{ companyDescription }}</p>
@@ -19,7 +15,7 @@
         <a routerLink="/company-profile">here</a>
     </p>
     <section class="employees-page-action-btns">
-        <button mat-mini-fab color="accent" class="add-employee-btn" (click)="addEmployee()" appShowAddEmployeeBtnText>
+        <button mat-mini-fab color="accent" class="add-employee-btn" (click)="addEmployee()">
             <mat-icon>add</mat-icon>
             <span class="add-employee-btn-text">Add Employee</span>
         </button>
