@@ -11,6 +11,10 @@ h2 {
     margin-bottom: 1rem;
 }
 
+mat-icon {
+    cursor: pointer;
+}
+
 .fields-wrapper {
     @include flex(row, nowrap, flex-start, center);
     mat-form-field {
@@ -32,14 +36,27 @@ mat-expansion-panel {
 .add-project {
     @include flex(row, nowrap, space-between, center);
     padding: 0.5rem;
-    border: 1px solid #69F0AE;
-    mat-icon {
-        cursor: pointer;
-    }
+    border: 1px solid rgb(160, 160, 160);
 }
 
 :host ::ng-deep .mat-expansion-indicator {
     margin-right: 1rem;
+}
+
+:host ::ng-deep .mat-list-base {
+    padding-top: 0 !important;
+}
+
+.mat-list-item {
+    border-right: 1px solid rgb(160, 160, 160);
+    border-bottom: 1px solid rgb(160, 160, 160);
+    border-left: 1px solid rgb(160, 160, 160);
+}
+
+:host ::ng-deep .mat-list-item-content {
+    @include flex(row, nowrap, space-between, center);
+    width: 100%;
+    padding: 0 8px !important;
 }
 
 .choose-logo {

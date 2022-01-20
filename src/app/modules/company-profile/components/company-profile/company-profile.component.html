@@ -22,10 +22,19 @@
             </mat-expansion-panel-header>
             <section class="add-service">
                 <span>Add service</span>
-                <mat-icon (click)="onAdd('service')">add</mat-icon>
+                <mat-icon (click)="onAdd('service')" matTooltip="Add Service" 
+                matTooltipPosition="below" [matTooltipClass]="['tooltip']">
+                    add
+                </mat-icon>
             </section>
             <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let service of services">{{ service }}</mat-list-item>
+                <mat-list-item role="listitem" *ngFor="let service of services">
+                    <span>{{ service }}</span>
+                    <mat-icon matTooltip="Delete Service" matTooltipPosition="below" 
+                    [matTooltipClass]="['tooltip']">
+                        delete
+                    </mat-icon>
+                </mat-list-item>
             </mat-list>
         </mat-expansion-panel>        
         <mat-expansion-panel>
@@ -36,10 +45,19 @@
             </mat-expansion-panel-header>
             <section class="add-project">
                 <span>Add project</span>
-                <mat-icon (click)="onAdd('project')">add</mat-icon>
+                <mat-icon (click)="onAdd('project')" matTooltip="Add Project" 
+                matTooltipPosition="below" [matTooltipClass]="['tooltip']">
+                    add
+                </mat-icon>
             </section>
             <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let project of projects">{{ project }}</mat-list-item>
+                <mat-list-item role="listitem" *ngFor="let project of projects">
+                    <span>{{ project }}</span>
+                    <mat-icon matTooltip="Delete Project" matTooltipPosition="below" 
+                    [matTooltipClass]="['tooltip']">
+                        delete
+                    </mat-icon>
+                </mat-list-item>
             </mat-list>
         </mat-expansion-panel>
         <section class="choose-logo">
