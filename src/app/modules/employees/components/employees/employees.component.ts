@@ -7,6 +7,7 @@ import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
+import { GetCompanyService } from '@shared/services/get-company.service';
 
 @Component({
   selector: 'app-employees',
@@ -14,6 +15,8 @@ import { SharedMethodsService } from '@shared/services/shared-methods.service';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
+  companyName: string;
+  companyDescription: string;
   employees: Employee[];
   isFiltered: boolean = false;
   filteredEmployees: Employee[] | null = null;
@@ -22,16 +25,26 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog, 
     public employeesService: EmployeesService,
-    private sharedMethodsService: SharedMethodsService
+    private sharedMethodsService: SharedMethodsService,
+    private getCompanyService: GetCompanyService
   ) { }
 
   ngOnInit(): void {
+    this.getCompanyDetails();
     this.getEmployees();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getCompanyDetails() {
+    this.getCompanyService.company.pipe(takeUntil(this.destroy$))
+        .subscribe((company: any) => { 
+          this.companyName = company[0].name;
+          this.companyDescription = company[0].description;
+        });
   }
 
   getEmployees() {

@@ -7,6 +7,10 @@
     matTooltip="Add company's logo and name" matTooltipPosition="below" [matTooltipClass]="['tooltip']">
         Customize
     </button>
+    <section class="company-details" *ngIf="companyName">
+        <h3>{{ companyName }}</h3>
+        <p>{{ companyDescription }}</p>
+    </section>
 </section>
 <section class="employees-page animate__animated animate__backInDown">
     <h2>EMPLOYEES</h2>

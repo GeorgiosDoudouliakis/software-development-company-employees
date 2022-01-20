@@ -49,6 +49,24 @@
     }
 }
 
+.company-details {
+    @include flex(column, nowrap, center, center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    h3 {
+        font-size: 3rem;
+        color: #69F0AE;
+    }
+    p {
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+}
+
 .employees-page {
     padding: 2rem;
 }
