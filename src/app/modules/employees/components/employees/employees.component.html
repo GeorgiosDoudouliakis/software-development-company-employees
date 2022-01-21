@@ -4,7 +4,7 @@
         <img src="assets/images/employees_page_default.jpg" class="default-img" />
     </picture>
     <section class="company-details" *ngIf="companyName">
-        <button mat-raised-button color="primary" class="company-logo-btn">
+        <button mat-raised-button color="primary" class="company-logo-btn" (click)="openUploadDialog()">
             Add Company Logo
         </button>
         <h3>{{ companyName }}</h3>

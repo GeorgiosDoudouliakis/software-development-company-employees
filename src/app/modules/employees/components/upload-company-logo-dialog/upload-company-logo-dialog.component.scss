@@ -1,0 +1,25 @@
+@import 'src/styles';
+
+h3 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.upload-field-container {
+    @include flex(row, nowrap, space-between, center);
+    margin-bottom: 1rem;
+}
+
+input {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.progress-bar-container > span {
+    font-size: 1rem;
+}
+
+.mat-progress-bar {
+    margin-bottom: 0.8rem;
+}

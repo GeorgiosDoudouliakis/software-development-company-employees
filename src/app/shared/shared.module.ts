@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatCardModule,
     MatChipsModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressBarModule
   ],
   exports: [
     HeaderComponent,
@@ -69,7 +71,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatCardModule,
     MatChipsModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }

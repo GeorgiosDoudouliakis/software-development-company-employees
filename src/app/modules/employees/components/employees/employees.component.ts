@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { GetCompanyService } from '@shared/services/get-company.service';
 import { CompanyDetailsComponent } from '../company-details/company-details.component';
+import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/upload-company-logo-dialog.component';
 
 @Component({
   selector: 'app-employees',
@@ -67,6 +68,10 @@ export class EmployeesComponent implements OnInit, OnDestroy {
           .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }
     })
+  }
+
+  openUploadDialog() {
+    this.dialog.open(UploadCompanyLogoDialogComponent, { width: '400px' });
   }
 
   openCompanyDetailsDialog() {
