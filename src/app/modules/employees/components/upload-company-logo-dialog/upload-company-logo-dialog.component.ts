@@ -33,8 +33,10 @@ export class UploadCompanyLogoDialogComponent implements OnInit {
   }
 
   updateLogo() {
-    this.ref.getDownloadURL().subscribe(url => {
-      if(url) this.dialog.close({ url });
-    })
+    if(this.ref) {
+      this.ref.getDownloadURL().subscribe(url => {
+        if(url) this.dialog.close({ url });
+      })
+    }
   }
 }

@@ -7,5 +7,9 @@
     </section>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-raised-button color="primary" (click)="updateLogo()">Ok</button>
+    <button mat-raised-button color="primary" (click)="updateLogo()"
+    [disabled]="!ref || (ref && !((uploadProgress | async) === 100))"
+    [style.cursor]="(!ref || (ref && !((uploadProgress | async) === 100))) ? 'no-drop' : 'pointer'">
+        Ok
+    </button>
 </mat-dialog-actions>
