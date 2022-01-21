@@ -6,7 +6,7 @@ import { Company } from '@shared/models/company.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CompanyProfileActionsService {
+export class AddCompanyService {
   constructor(
     private afAuth: AngularFireAuth, 
     private db: AngularFirestore
@@ -18,9 +18,5 @@ export class CompanyProfileActionsService {
       ...data,
       uid: user?.uid
     })
-  }
-
-  updateCompany(companyId: string, company: Company) {
-    return this.db.collection('companies').doc(companyId).update({ ...company });
   }
 }

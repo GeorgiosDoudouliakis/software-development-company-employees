@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GetCompanyService } from '@shared/services/get-company.service';
+import { GetUpdateCompanyService } from '@shared/services/get-update-company.service';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
-import { CompanyProfileActionsService } from '../../services/company-profile-actions.service';
+import { AddCompanyService } from '../../services/add-company.service';
 import { AddServiceProjectDialogComponent } from '../add-service-project-dialog/add-service-project-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 
@@ -22,15 +22,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   companyId: string;
   private destroy$ = new Subject()
 
-  constructor(
-    private getCompanyService: GetCompanyService, 
+  constructor( 
     private dialog: MatDialog,
-    private companyProfileActionsService: CompanyProfileActionsService,
+    private addCompanyService: AddCompanyService,
+    private getUpdateCompanyService: GetUpdateCompanyService,
     private sharedMethodsService: SharedMethodsService
   ) { }
 
   ngOnInit(): void {
-    this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
+    this.getUpdateCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
       if(companies.length > 0) {
         const { name, founder, description, services, projects, id } = companies[0];
         this.name = name || '';
@@ -92,7 +92,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if(!this.companyId) {
-      this.companyProfileActionsService.addCompany({
+      this.addCompanyService.addCompany({
         name: this.name,
         founder: this.founder,
         description: this.description,
@@ -101,7 +101,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     } else {
-      this.companyProfileActionsService.updateCompany(this.companyId, {
+      this.getUpdateCompanyService.updateCompany(this.companyId, {
         name: this.name,
         founder: this.founder,
         description: this.description,

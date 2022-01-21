@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Company } from '@shared/models/company.model';
-import { GetCompanyService } from '@shared/services/get-company.service';
+import { GetUpdateCompanyService } from '@shared/services/get-update-company.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -13,7 +13,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   company: Company;
   private destroy$ = new Subject();
 
-  constructor(private getCompanyService: GetCompanyService) { }
+  constructor(private getUpdateCompanyService: GetUpdateCompanyService) { }
 
   ngOnInit(): void {
     this.getCompany();
@@ -25,7 +25,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   getCompany() {
-    this.getCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
+    this.getUpdateCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
       if(companies.length > 0) {
         const { name, founder, description, services, projects } = companies[0];
         this.company = { name, founder, description, services, projects };

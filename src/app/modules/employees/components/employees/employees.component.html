@@ -3,16 +3,16 @@
         <source type="image/webp" srcset="assets/images/employees_page_default.webp" />
         <img src="assets/images/employees_page_default.jpg" class="default-img" />
     </picture>
-    <section class="company-details" *ngIf="companyName">
-        <button mat-raised-button color="primary" *ngIf="!companyLogo?.url"
+    <section class="company-details" *ngIf="company?.name">
+        <button mat-raised-button color="primary" *ngIf="!company?.logo"
         class="company-logo-btn" (click)="openUploadDialog()">
             Add Company Logo
         </button>
-        <section class="company-logo-container" *ngIf="companyLogo?.url">
-            <img [src]="companyLogo.url" [alt]="companyName + ' logo'">
+        <section class="company-logo-container" *ngIf="company?.logo">
+            <img [src]="company?.logo" [alt]="company?.name + ' logo'">
         </section>
-        <h3>{{ companyName }}</h3>
-        <p>{{ companyDescription }}</p>
+        <h3>{{ company?.name }}</h3>
+        <p>{{ company?.description }}</p>
     </section>
 </section>
 <section class="employees-page animate__animated animate__backInDown">

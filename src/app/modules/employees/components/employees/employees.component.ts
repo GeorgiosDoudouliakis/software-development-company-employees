@@ -7,9 +7,10 @@ import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
-import { GetCompanyService } from '@shared/services/get-company.service';
+import { GetUpdateCompanyService } from '@shared/services/get-update-company.service';
 import { CompanyDetailsComponent } from '../company-details/company-details.component';
 import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/upload-company-logo-dialog.component';
+import { Company } from '@shared/models/company.model';
 
 @Component({
   selector: 'app-employees',
@@ -17,17 +18,16 @@ import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
-  companyName: string;
-  companyDescription: string;
+  company: Company;
+  companyId: string;
   employees: Employee[];
-  companyLogo: any;
   private destroy$ = new Subject();
 
   constructor(
     private dialog: MatDialog, 
     public employeesService: EmployeesService,
     private sharedMethodsService: SharedMethodsService,
-    private getCompanyService: GetCompanyService
+    private getUpdateCompanyService: GetUpdateCompanyService
   ) { }
 
   ngOnInit(): void {
@@ -41,11 +41,12 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   getCompanyDetails() {
-    this.getCompanyService.company.pipe(takeUntil(this.destroy$))
+    this.getUpdateCompanyService.company.pipe(takeUntil(this.destroy$))
         .subscribe((companies: any) => {
           if(companies.length > 0) {
-            this.companyName = companies[0].name;
-            this.companyDescription = companies[0].description;
+            const { name, founder, description, services, projects, logo, id } = companies[0]; 
+            this.company = { name, founder, description, services, projects, logo };
+            this.companyId = id;
           }
         });
   }
@@ -75,7 +76,13 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(UploadCompanyLogoDialogComponent, { width: '400px', data: {} });
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(url => {
-      if(url) this.companyLogo = url;
+      if(url) {
+        this.getUpdateCompanyService.updateCompany(this.companyId, { ...this.company, logo: url.url })
+          .then(_ => { 
+            this.sharedMethodsService.openSnackBar("Company logo updated successfully!", "success");
+          })
+          .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
+      }
     })
   }
 

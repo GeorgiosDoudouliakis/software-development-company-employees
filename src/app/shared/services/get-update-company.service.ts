@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class GetCompanyService {
+export class GetUpdateCompanyService {
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
 
@@ -22,5 +22,9 @@ export class GetCompanyService {
         }
       })
     )
+  }
+
+  updateCompany(companyId: string, company: Company) {
+    return this.db.collection('companies').doc(companyId).update({ ...company });
   }
 }
