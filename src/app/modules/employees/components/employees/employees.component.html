@@ -13,6 +13,10 @@
         </section>
         <h3>{{ company?.name }}</h3>
         <p>{{ company?.description }}</p>
+        <button mat-stroked-button color="accent" *ngIf="company?.logo" 
+        class="change-logo-btn" (click)="openUploadDialog()">
+            Change Logo
+        </button>
     </section>
 </section>
 <section class="employees-page animate__animated animate__backInDown">

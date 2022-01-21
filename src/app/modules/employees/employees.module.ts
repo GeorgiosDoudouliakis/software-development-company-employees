@@ -10,6 +10,7 @@ import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { ShowAddEmployeeBtnTextDirective } from './directives/show-add-employee-btn-text.directive';
 import { UploadCompanyLogoDialogComponent } from './components/upload-company-logo-dialog/upload-company-logo-dialog.component';
+import { ShowCustromizeLogoBtnDirective } from './directives/show-custromize-logo-btn.directive';
 
 const routes = [
   { path: '', component: EmployeesComponent , canActivate: [AuthGuard] }
@@ -23,7 +24,8 @@ const routes = [
     RemoveSpacesPipe,
     CompanyDetailsComponent,
     ShowAddEmployeeBtnTextDirective,
-    UploadCompanyLogoDialogComponent
+    UploadCompanyLogoDialogComponent,
+    ShowCustromizeLogoBtnDirective
   ],
   imports: [
     CommonModule,
