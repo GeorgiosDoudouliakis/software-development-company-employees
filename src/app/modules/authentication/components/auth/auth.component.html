@@ -41,4 +41,7 @@
             <button mat-button color="accent" role="link" (click)="router.navigate(['/auth/sign-up'])">Sign Up</button>
         </div>
     </ng-container>
+    <ng-container *ngIf="authType === 'signup'">
+        <button mat-button color="accent" (click)="router.navigate(['../'])">Go Back</button>
+    </ng-container>
 </section>
