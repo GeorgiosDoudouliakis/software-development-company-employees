@@ -1,6 +1,11 @@
 @import './mixins';
 @import '~animate.css/animate.min';
 
+h2 {
+    font-size: 2rem;
+    color: white;
+}
+
 p {
     line-height: 1.6rem;
 }
@@ -59,8 +64,6 @@ a {
         margin-bottom: 1rem;
     }
     h2 {
-        font-size: 2rem;
-        color: white;
         letter-spacing: 0.1rem;
     }
     p {
