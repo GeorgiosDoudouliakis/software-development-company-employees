@@ -1,17 +1,17 @@
 <h3 mat-dialog-title>Upload Company Logo</h3>
 <mat-dialog-content>
     <section class="upload-field-container">
-        <input type="file" />
+        <input type="file" accept=".png,.jpg" (change)="upload($event)" />
         <button mat-mini-fab color="primary" aria-label="upload company logo"
         matTooltip="Upload Logo" matTooltipPosition="below" [matTooltipClass]="['tooltip']">
         <mat-icon>cloud_upload</mat-icon>
     </button>
     </section>
     <section class="progress-bar-container">
-        <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
-        <span>Progress: </span>
+        <mat-progress-bar mode="determinate" [value]="uploadProgress | async" color="accent"></mat-progress-bar>
+        <span>Progress: {{ uploadProgress | async }}%</span>
     </section>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button (click)="updateLogo()">Ok</button>
 </mat-dialog-actions>

@@ -20,6 +20,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   companyName: string;
   companyDescription: string;
   employees: Employee[];
+  companyLogo: any;
   private destroy$ = new Subject();
 
   constructor(
@@ -71,7 +72,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   openUploadDialog() {
-    this.dialog.open(UploadCompanyLogoDialogComponent, { width: '400px' });
+    const dialogRef = this.dialog.open(UploadCompanyLogoDialogComponent, { width: '400px', data: {} });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(url => {
+      if(url) this.companyLogo = url;
+    })
   }
 
   openCompanyDetailsDialog() {
