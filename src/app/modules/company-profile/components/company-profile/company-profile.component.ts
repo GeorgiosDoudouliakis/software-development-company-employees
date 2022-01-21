@@ -30,17 +30,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.getUpdateCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
-      if(companies.length > 0) {
-        const { name, founder, description, services, projects, id } = companies[0];
-        this.name = name || '';
-        this.founder = founder || '';
-        this.description = description || '';
-        this.services = services || [];
-        this.projects = projects || [];
-        this.companyId = id;
-      }
-    });
+    this.getCompany();
   }
 
   ngOnDestroy() {
@@ -53,6 +43,20 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       return 'Update';
     }
     return 'Submit';
+  }
+
+  getCompany() {
+    this.getUpdateCompanyService.company.pipe(takeUntil(this.destroy$)).subscribe((companies: any) => {
+      if(companies.length > 0) {
+        const { name, founder, description, services, projects, id } = companies[0];
+        this.name = name || '';
+        this.founder = founder || '';
+        this.description = description || '';
+        this.services = services || [];
+        this.projects = projects || [];
+        this.companyId = id;
+      }
+    });
   }
 
   onAdd(type: 'service' | 'project') {
@@ -91,23 +95,21 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    const company = { 
+      name: this.name,
+      founder: this.founder,
+      description: this.description,
+      services: this.services,
+      projects: this.projects
+    }
+
     if(!this.companyId) {
-      this.addCompanyService.addCompany({
-        name: this.name,
-        founder: this.founder,
-        description: this.description,
-        services: this.services,
-        projects: this.projects
-      }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
+      this.addCompanyService.addCompany({ ...company })
+        .then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     } else {
-      this.getUpdateCompanyService.updateCompany(this.companyId, {
-        name: this.name,
-        founder: this.founder,
-        description: this.description,
-        services: this.services,
-        projects: this.projects
-      }).then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully updated!", "success"))
+      this.getUpdateCompanyService.updateCompany(this.companyId, { ...company })
+        .then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully updated!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
     }
   }
