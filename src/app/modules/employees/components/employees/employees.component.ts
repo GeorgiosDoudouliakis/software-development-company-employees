@@ -87,6 +87,6 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   openCompanyDetailsDialog() {
-    this.dialog.open(CompanyDetailsComponent, { width: '400px' });
+    this.dialog.open(CompanyDetailsComponent, { width: '450px' });
   }
 }
