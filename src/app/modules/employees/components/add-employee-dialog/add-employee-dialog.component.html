@@ -34,7 +34,7 @@
             <mat-select formControlName="projects" multiple>
               <mat-option *ngFor="let project of availableProjects" [value]="project">{{ project }}</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
         <small *ngIf="employeeForm.invalid" class="error">You must fill all the fields in order to add an employee</small>
     </form>
 </mat-dialog-content>

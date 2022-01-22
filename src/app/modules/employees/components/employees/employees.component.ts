@@ -56,6 +56,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   addEmployee() {
+    if(this.company && this.company.projects?.length === 0) {
+      this.sharedMethodsService.openSnackBar("Please add projects to your profile in order to continue!", "info");
+      return;
+    }
+
     const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       width: '400px',
       data: {
