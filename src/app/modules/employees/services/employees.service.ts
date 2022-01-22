@@ -4,9 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Employee } from '../models/employee.model';
 import { switchMap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EmployeesService {
   availableSpecialities: string[] = ['Front End', 'Back End', 'Full Stack'];
 
