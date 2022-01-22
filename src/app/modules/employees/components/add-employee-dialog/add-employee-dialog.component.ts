@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../../services/employees.service';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
+import { GetUpdateCompanyService } from '@shared/services/get-update-company.service';
 
 @Component({
   selector: 'app-add-employee-dialog',
@@ -19,12 +20,13 @@ export class AddEmployeeDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
     private employeesService: EmployeesService,
-    private sharedMethodsService: SharedMethodsService
+    private sharedMethodsService: SharedMethodsService,
+    private getUpdateCompanyService: GetUpdateCompanyService
   ) {}
 
   ngOnInit(): void {
     this.availableSpecialities = this.employeesService.availableSpecialities;
-    this.availableProjects = this.employeesService.availableProjects;
+    this.getCompany();
     this.initializeEmployeeForm();
   }
 
@@ -75,6 +77,14 @@ export class AddEmployeeDialogComponent implements OnInit {
     })
   }
 
+  private getCompany() {
+    this.getUpdateCompanyService.company.subscribe((companies: any) => {
+      if(companies.length > 0) {
+        this.availableProjects = companies[0].projects;
+      }
+    })
+  }
+
   private initializeEmployeeForm() {
     this.employeeForm = this.fb.group({
       firstName: this.fb.control(this.data.firstName || '', Validators.required),
@@ -82,7 +92,7 @@ export class AddEmployeeDialogComponent implements OnInit {
       contractType: this.fb.control(this.data.contractType || '', Validators.required),
       speciality: this.fb.control(this.data.speciality || '', Validators.required),
       technologies: this.fb.control(this.data.technologies || [], Validators.required),
-      projects: this.fb.control(this.data.projects || [], Validators.required),
+      projects: this.fb.control(this.data.action === 'edit' ? this.data.projects : [], Validators.required),
     })
   }
 }
