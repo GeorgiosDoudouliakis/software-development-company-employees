@@ -35,7 +35,7 @@
             Company Details
         </button>
     </section>
-    <p class="no-employees">{{ employees?.length === 0 ? 'No employees found!' : '' }}</p>
+    <p class="no-employees">{{ employees?.length === 0 ? 'NO EMPLOYEES FOUND!' : '' }}</p>
     <section class="employees-container">
         <ng-container *ngFor="let employee of employees">
             <app-employee [employee]="employee"></app-employee>
