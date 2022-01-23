@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { EmployeesComponent } from './components/employees/employees.component';
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add-employee-dialog.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
@@ -13,7 +12,7 @@ import { UploadCompanyLogoDialogComponent } from './components/upload-company-lo
 import { EmployeesService } from './services/employees.service';
 
 const routes = [
-  { path: '', component: EmployeesComponent , canActivate: [AuthGuard] }
+  { path: '', component: EmployeesComponent }
 ]
 
 @NgModule({
