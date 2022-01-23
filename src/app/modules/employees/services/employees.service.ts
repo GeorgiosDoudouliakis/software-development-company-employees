@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Employee } from '@shared/models/employee.model';
 import { switchMap } from 'rxjs/operators';
+import { Employee } from '../models/employee.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GetUpdateEmployeeService {
+@Injectable()
+export class EmployeesService {
+  availableSpecialities: string[] = ['Front End', 'Back End', 'Full Stack'];
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private db: AngularFirestore
+  ) { }
+
+  async addEmployee(data: Employee) {
+    const user = await this.afAuth.currentUser;
+    return this.db.collection('employees').add({
+      ...data,
+      uid: user?.uid
+    })
+  }
 
   get employees() {
     return this.afAuth.authState.pipe(
@@ -26,5 +36,9 @@ export class GetUpdateEmployeeService {
 
   updateEmployee(employeeId: string | undefined, employee: Employee) {
     return this.db.collection('employees').doc(employeeId).update({ ...employee });
+  }
+
+  deleteEmployee(employeeId: string | undefined) {
+    return this.db.collection('employees').doc(employeeId).delete();
   }
 }

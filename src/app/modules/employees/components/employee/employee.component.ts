@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseError } from '@firebase/util';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
-import { GetUpdateEmployeeService } from '@shared/services/get-update-employee.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Employee } from '@shared/models/employee.model';
-import { AddDeleteEmployeeService } from '../../services/add-delete-employee.service';
+import { Employee } from '../../models/employee.model';
+import { EmployeesService } from '../../services/employees.service';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
 
 @Component({
@@ -20,8 +19,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   constructor(
-    private addDeleteEmployeeService: AddDeleteEmployeeService, 
-    private getUpdateEmployeeService: GetUpdateEmployeeService,
+    private employeesService: EmployeesService, 
     private dialog: MatDialog,
     private sharedMethodsService: SharedMethodsService
   ) { }
@@ -34,7 +32,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   onDelete(employeeId: string | undefined) {
-    this.addDeleteEmployeeService.deleteEmployee(employeeId)
+    this.employeesService.deleteEmployee(employeeId)
       .then(_ => this.sharedMethodsService.openSnackBar('Employee has been successfully deleted!', 'success'))
       .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err))
   }
@@ -49,7 +47,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {
       if(emp) {
-        this.getUpdateEmployeeService.updateEmployee(employee.id, emp)
+        this.employeesService.updateEmployee(employee.id, emp)
         .then(_ => this.sharedMethodsService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }

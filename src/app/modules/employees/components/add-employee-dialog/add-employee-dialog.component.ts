@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddDeleteEmployeeService } from '../../services/add-delete-employee.service';
+import { EmployeesService } from '../../services/employees.service';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
 import { GetUpdateCompanyService } from '@shared/services/get-update-company.service';
 
@@ -19,13 +19,13 @@ export class AddEmployeeDialogComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
-    private addDeleteEmployeeService: AddDeleteEmployeeService,
+    private employeesService: EmployeesService,
     private sharedMethodsService: SharedMethodsService,
     private getUpdateCompanyService: GetUpdateCompanyService
   ) {}
 
   ngOnInit(): void {
-    this.availableSpecialities = this.addDeleteEmployeeService.availableSpecialities;
+    this.availableSpecialities = this.employeesService.availableSpecialities;
     this.getCompany();
     this.initializeEmployeeForm();
   }

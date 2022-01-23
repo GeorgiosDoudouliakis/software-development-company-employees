@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
-import { Employee } from '@shared/models/employee.model';
-import { AddDeleteEmployeeService } from '../../services/add-delete-employee.service';
+import { Employee } from '../../models/employee.model';
+import { EmployeesService } from '../../services/employees.service';
 import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,7 +11,6 @@ import { GetUpdateCompanyService } from '@shared/services/get-update-company.ser
 import { CompanyDetailsComponent } from '../company-details/company-details.component';
 import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/upload-company-logo-dialog.component';
 import { Company } from '@shared/models/company.model';
-import { GetUpdateEmployeeService } from '@shared/services/get-update-employee.service';
 
 @Component({
   selector: 'app-employees',
@@ -26,8 +25,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog, 
-    public addDeleteEmployeeService: AddDeleteEmployeeService,
-    private getUpdateEmployeeService: GetUpdateEmployeeService,
+    public employeesService: EmployeesService,
     private sharedMethodsService: SharedMethodsService,
     private getUpdateCompanyService: GetUpdateCompanyService
   ) { }
@@ -54,7 +52,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   getEmployees() {
-    this.getUpdateEmployeeService.employees.pipe(takeUntil(this.destroy$)).subscribe(res => this.employees = res);
+    this.employeesService.employees.pipe(takeUntil(this.destroy$)).subscribe(res => this.employees = res);
   }
 
   addEmployee() {
@@ -72,7 +70,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((employee: Employee) => {
       if(employee) {
-        this.addDeleteEmployeeService.addEmployee(employee)
+        this.employeesService.addEmployee(employee)
           .then(_ => this.sharedMethodsService.openSnackBar('Employee succesfully added', 'success'))
           .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }
