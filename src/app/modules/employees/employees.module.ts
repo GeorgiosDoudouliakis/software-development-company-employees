@@ -9,7 +9,7 @@ import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { ShowAddEmployeeBtnTextDirective } from './directives/show-add-employee-btn-text.directive';
 import { UploadCompanyLogoDialogComponent } from './components/upload-company-logo-dialog/upload-company-logo-dialog.component';
-import { EmployeesService } from './services/employees.service';
+import { AddDeleteEmployeeService } from './services/add-delete-employee.service';
 
 const routes = [
   { path: '', component: EmployeesComponent }
@@ -33,6 +33,6 @@ const routes = [
   exports: [
     RouterModule
   ],
-  providers: [EmployeesService]
+  providers: [AddDeleteEmployeeService]
 })
 export class EmployeesModule { }

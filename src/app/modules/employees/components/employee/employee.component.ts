@@ -6,7 +6,7 @@ import { GetUpdateEmployeeService } from '@shared/services/get-update-employee.s
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Employee } from '@shared/models/employee.model';
-import { EmployeesService } from '../../services/employees.service';
+import { AddDeleteEmployeeService } from '../../services/add-delete-employee.service';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   constructor(
-    private employeesService: EmployeesService, 
+    private addDeleteEmployeeService: AddDeleteEmployeeService, 
     private getUpdateEmployeeService: GetUpdateEmployeeService,
     private dialog: MatDialog,
     private sharedMethodsService: SharedMethodsService
@@ -34,7 +34,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   onDelete(employeeId: string | undefined) {
-    this.employeesService.deleteEmployee(employeeId)
+    this.addDeleteEmployeeService.deleteEmployee(employeeId)
       .then(_ => this.sharedMethodsService.openSnackBar('Employee has been successfully deleted!', 'success'))
       .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err))
   }

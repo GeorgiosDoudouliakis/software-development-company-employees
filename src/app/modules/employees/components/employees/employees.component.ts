@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
 import { Employee } from '@shared/models/employee.model';
-import { EmployeesService } from '../../services/employees.service';
+import { AddDeleteEmployeeService } from '../../services/add-delete-employee.service';
 import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog, 
-    public employeesService: EmployeesService,
+    public addDeleteEmployeeService: AddDeleteEmployeeService,
     private getUpdateEmployeeService: GetUpdateEmployeeService,
     private sharedMethodsService: SharedMethodsService,
     private getUpdateCompanyService: GetUpdateCompanyService
@@ -72,7 +72,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((employee: Employee) => {
       if(employee) {
-        this.employeesService.addEmployee(employee)
+        this.addDeleteEmployeeService.addEmployee(employee)
           .then(_ => this.sharedMethodsService.openSnackBar('Employee succesfully added', 'success'))
           .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }

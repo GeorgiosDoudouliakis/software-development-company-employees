@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Employee } from '../../../shared/models/employee.model';
 
 @Injectable()
-export class EmployeesService {
+export class AddDeleteEmployeeService {
   availableSpecialities: string[] = ['Front End', 'Back End', 'Full Stack'];
 
   constructor(
