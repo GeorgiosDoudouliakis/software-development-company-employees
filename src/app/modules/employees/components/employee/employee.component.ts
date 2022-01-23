@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseError } from '@firebase/util';
 import { SharedMethodsService } from '@shared/services/shared-methods.service';
-import { UpdateEmployeeService } from '@shared/services/update-employee.service';
+import { GetUpdateEmployeeService } from '@shared/services/get-update-employee.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Employee } from '@shared/models/employee.model';
@@ -21,7 +21,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   constructor(
     private employeesService: EmployeesService, 
-    private updateEmployeeService: UpdateEmployeeService,
+    private getUpdateEmployeeService: GetUpdateEmployeeService,
     private dialog: MatDialog,
     private sharedMethodsService: SharedMethodsService
   ) { }
@@ -49,7 +49,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe((emp: Employee) => {
       if(emp) {
-        this.updateEmployeeService.updateEmployee(employee.id, emp)
+        this.getUpdateEmployeeService.updateEmployee(employee.id, emp)
         .then(_ => this.sharedMethodsService.openSnackBar(`${emp.firstName} ${emp.lastName} succesfully updated!`, 'success'))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
       }

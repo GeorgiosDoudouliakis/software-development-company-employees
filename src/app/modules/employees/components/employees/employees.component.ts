@@ -11,6 +11,7 @@ import { GetUpdateCompanyService } from '@shared/services/get-update-company.ser
 import { CompanyDetailsComponent } from '../company-details/company-details.component';
 import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/upload-company-logo-dialog.component';
 import { Company } from '@shared/models/company.model';
+import { GetUpdateEmployeeService } from '@shared/services/get-update-employee.service';
 
 @Component({
   selector: 'app-employees',
@@ -26,6 +27,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog, 
     public employeesService: EmployeesService,
+    private getUpdateEmployeeService: GetUpdateEmployeeService,
     private sharedMethodsService: SharedMethodsService,
     private getUpdateCompanyService: GetUpdateCompanyService
   ) { }
@@ -52,7 +54,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   getEmployees() {
-    this.employeesService.employees.pipe(takeUntil(this.destroy$)).subscribe(res => this.employees = res);
+    this.getUpdateEmployeeService.employees.pipe(takeUntil(this.destroy$)).subscribe(res => this.employees = res);
   }
 
   addEmployee() {
