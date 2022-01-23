@@ -55,6 +55,10 @@ a {
     padding: 0 0 8px 0;
 }
 
+.mat-hint {
+    font-size: 0.8rem;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);

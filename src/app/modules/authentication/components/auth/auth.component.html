@@ -13,6 +13,7 @@
             <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword; $event.preventDefault();" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                 <mat-icon class="preview-password">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
+            <mat-hint>Minimum characters: {{ password?.value.length || 0 }}/10</mat-hint>
             <mat-error *ngIf="password?.invalid">Password must contain at least 10 characters</mat-error>
         </mat-form-field>
         <ng-container *ngIf="authType === 'signup'">
@@ -22,6 +23,7 @@
                 <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword; $event.preventDefault();" [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hideConfirmPassword">
                     <mat-icon class="preview-password">{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                 </button>
+                <mat-hint>Minimum characters: {{ confirmPassword?.value.length || 0 }}/10</mat-hint>
                 <mat-error *ngIf="confirmPassword?.invalid">Password must contain at least 10 characters</mat-error>
             </mat-form-field>
         </ng-container>
