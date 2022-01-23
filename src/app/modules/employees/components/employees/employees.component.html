@@ -3,9 +3,10 @@
         <source type="image/webp" srcset="assets/images/employees_page_default.webp" />
         <img src="assets/images/employees_page_default.jpg" class="default-img" />
     </picture>
-    <section class="company-details" *ngIf="company?.name">
+    <section class="company-details">
         <button mat-raised-button color="primary" *ngIf="!company?.logo"
-        class="company-logo-btn" (click)="openUploadDialog()">
+        class="company-logo-btn" [style.marginBottom]="!company?.logo ? '1.5rem' : ''"
+        (click)="openUploadDialog()">
             Add Company Logo
         </button>
         <section class="company-logo-container" *ngIf="company?.logo">
