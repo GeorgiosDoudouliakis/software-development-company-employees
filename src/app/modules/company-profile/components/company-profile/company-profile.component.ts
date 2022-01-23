@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { AddCompanyService } from '../../services/add-company.service';
 import { AddServiceProjectDialogComponent } from '../add-service-project-dialog/add-service-project-dialog.component';
 import { takeUntil } from 'rxjs/operators';
+import { Company } from '@shared/models/company.model';
 
 @Component({
   selector: 'app-company-profile',
@@ -104,13 +105,21 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     }
 
     if(!this.companyId) {
-      this.addCompanyService.addCompany({ ...company })
+      this.addCompany(company);
+    } else {
+      this.updateCompany(company);
+    }
+  }
+
+  private addCompany(company: Company) {
+    this.addCompanyService.addCompany({ ...company })
         .then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully added!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
-    } else {
-      this.getUpdateCompanyService.updateCompany(this.companyId, { ...company })
+  }
+
+  private updateCompany(company: Company) {
+    this.getUpdateCompanyService.updateCompany(this.companyId, { ...company })
         .then(_ => this.sharedMethodsService.openSnackBar("Your company's details have been successfully updated!", "success"))
         .catch((err: FirebaseError) => this.sharedMethodsService.showErrorMessage(err));
-    }
   }
 }
