@@ -59,6 +59,10 @@ a {
     font-size: 0.8rem;
 }
 
+.mat-input-element {
+    caret-color: white;
+}
+
 // Reusable Classes
 .auth-page {
     @include flex(column, nowrap, center, center);
