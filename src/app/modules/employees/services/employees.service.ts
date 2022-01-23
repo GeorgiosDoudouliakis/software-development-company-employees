@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Employee } from '../models/employee.model';
+import { Employee } from '../../../shared/models/employee.model';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
@@ -36,9 +36,5 @@ export class EmployeesService {
 
   deleteEmployee(employeeId: string | undefined) {
     return this.db.collection('employees').doc(employeeId).delete();
-  }
-
-  updateEmployee(employeeId: string | undefined, employee: Employee) {
-    return this.db.collection('employees').doc(employeeId).update({ ...employee });
   }
 }

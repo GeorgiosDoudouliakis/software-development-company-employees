@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
-import { Employee } from '../../models/employee.model';
+import { Employee } from '@shared/models/employee.model';
 import { EmployeesService } from '../../services/employees.service';
 import { FirebaseError } from '@firebase/util';
 import { Subject } from 'rxjs';
