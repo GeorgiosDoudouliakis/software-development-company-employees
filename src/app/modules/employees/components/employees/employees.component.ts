@@ -82,7 +82,10 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   }
 
   openUploadDialog() {
-    const dialogRef = this.dialog.open(UploadCompanyLogoDialogComponent, { width: '400px', data: {} });
+    const dialogRef = this.dialog.open(UploadCompanyLogoDialogComponent, { 
+      width: '400px', 
+      data: { company: this.company } 
+    });
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(url => {
       if(url) {

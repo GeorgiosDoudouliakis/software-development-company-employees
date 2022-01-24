@@ -5,11 +5,12 @@
         <mat-progress-bar mode="determinate" [value]="uploadProgress | async" color="accent"></mat-progress-bar>
         <span>Progress(%): {{ uploadProgress | async }}</span>
     </section>
+    <small class="error" *ngIf="!data.company">Update your company's details in order to add logo</small>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" (click)="updateLogo()"
-    [disabled]="!ref || (ref && !((uploadProgress | async) === 100))"
-    [style.cursor]="(!ref || (ref && !((uploadProgress | async) === 100))) ? 'no-drop' : 'pointer'">
+    [disabled]="!data.company || !ref || (ref && !((uploadProgress | async) === 100))"
+    [style.cursor]="(!data.company || !ref || (ref && !((uploadProgress | async) === 100))) ? 'no-drop' : 'pointer'">
         Ok
     </button>
 </mat-dialog-actions>
