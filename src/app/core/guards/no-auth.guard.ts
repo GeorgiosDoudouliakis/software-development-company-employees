@@ -8,20 +8,21 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class NoAuthGuard implements CanActivate {
   constructor(
-    private afAuth: AngularFireAuth, 
-    private router: Router, 
-    private authService: AuthService
+    private afAuth: AngularFireAuth,
+    private authService: AuthService, 
+    private router: Router
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
     return this.afAuth.authState.pipe(
       map((res: any) => {
-        if(!res) {
-          this.router.navigate(['/auth/login']);
-          this.authService.openSnackBar('You have no permission to access this link. Please log in!', 'info');
+        if(res) {
+          this.authService.openSnackBar("Redirecting...", "info");
+          this.router.navigate(['/company-profile']);
           return false;
         }
         return true;

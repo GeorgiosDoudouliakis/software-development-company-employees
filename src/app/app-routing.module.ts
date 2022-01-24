@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from '@shared/components/page-not-found/page-not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { NoAuthGuard } from './core/guards/no-auth.guard';
 
 const routes: Routes = [
   { 
@@ -11,6 +12,7 @@ const routes: Routes = [
   },
   { 
     path: 'auth', 
+    canActivate: [NoAuthGuard],
     loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) 
   },
   { 
