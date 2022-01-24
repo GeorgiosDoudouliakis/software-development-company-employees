@@ -49,11 +49,25 @@
     gap: 10px;
 }
 
-.mat-list-base {
+:host ::ng-deep .mat-list-item {
+    width: 100px !important;
+    height: 35px !important;
+}
+
+:host ::ng-deep .mat-list-base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding-top: 0;
     background: #69F0AE;
     border-radius: 4px;
+    .mat-list-item {
+        font-size: 13px;
+        .mat-list-item-content {
+            padding: 0;
+        }
+    }
 }
 
 ::ng-deep .mat-list-item-content {
