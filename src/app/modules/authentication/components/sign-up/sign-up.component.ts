@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  constructor() { }
+  constructor(private seoService: SeoService) {
+    this.seoService.generateTags([{ name: 'description', content: 'Create an account' }], 'Sign Up');
+  }
 
   ngOnInit(): void {}
 }

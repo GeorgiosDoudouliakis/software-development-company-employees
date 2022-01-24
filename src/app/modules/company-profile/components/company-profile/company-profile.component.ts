@@ -8,6 +8,7 @@ import { AddCompanyService } from '../../services/add-company.service';
 import { AddServiceProjectDialogComponent } from '../add-service-project-dialog/add-service-project-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { Company } from '@shared/models/company.model';
+import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-company-profile',
@@ -23,12 +24,15 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   companyId: string;
   private destroy$ = new Subject()
 
-  constructor( 
+  constructor(
+    private seoService: SeoService, 
     private dialog: MatDialog,
     private addCompanyService: AddCompanyService,
     private getUpdateCompanyService: GetUpdateCompanyService,
     private sharedMethodsService: SharedMethodsService
-  ) { }
+  ) { 
+    this.seoService.generateTags([{ name: 'description' , content: "Add your company's details like it's brand name, founder, a description about it, services and projects" }], 'Company Profile');
+  }
 
   ngOnInit(): void {
     this.getCompany();

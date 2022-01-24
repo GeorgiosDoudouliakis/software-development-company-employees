@@ -11,6 +11,7 @@ import { GetUpdateCompanyService } from '@shared/services/get-update-company.ser
 import { CompanyDetailsComponent } from '../company-details/company-details.component';
 import { UploadCompanyLogoDialogComponent } from '../upload-company-logo-dialog/upload-company-logo-dialog.component';
 import { Company } from '@shared/models/company.model';
+import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-employees',
@@ -24,11 +25,14 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   constructor(
+    private seoService: SeoService,
     private dialog: MatDialog, 
     public employeesService: EmployeesService,
     private sharedMethodsService: SharedMethodsService,
     private getUpdateCompanyService: GetUpdateCompanyService
-  ) { }
+  ) { 
+    this.seoService.generateTags([{ name: 'description' , content: "Page where the user can add employees and edit each one of them, can see brief information about the company and add/edit it's brand logo" }], "Employees");
+  }
 
   ngOnInit(): void {
     this.getCompanyDetails();
